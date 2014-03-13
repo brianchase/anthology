@@ -1,0 +1,454 @@
+% Last modified: Thu 13 Mar 2014 03:58:23 PM EDT
+
+% This software is provided 'as is', without warranty of any kind,
+% either expressed or implied, including, but not limited to, the
+% implied warranties of merchantability and fitness for a particular
+% purpose.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{anthology}
+\RequirePackage{etoolbox,ifthen}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%  Package Options  %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newif\ifcolorlinks % If true, links have color
+\DeclareOption{colorlinks}{\colorlinkstrue}
+% Options for Windy City:
+\DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\DeclareOption{collsonly}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\DeclareOption{firstshort}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\DeclareOption{reflist}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\ProcessOptions
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Basic Formatting  %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frenchspacing                % French spacing after punctuation
+\setlength{\parindent}{1.1em} % Indent paragraphs by this value
+\widowpenalty=1000            % Reduce but don't prohibit widows
+\clubpenalty=1000             % Reduce but don't prohibit orphans
+
+\if@twocolumn % Vertical justification only if '@twocolumntrue'
+  \usepackage{fixltx2e}% Address other issues with two columns
+  \setlength{\columnsep}{20pt}% Separate columns by this value
+  \flushbottom
+\else
+  \raggedbottom
+\fi
+
+% Change 'cleardoublepage' to allow blank pages:
+\let\orgdoublepage\cleardoublepage
+\newcommand{\clearemptypage}{%
+  \clearpage{\pagestyle{empty}\orgdoublepage}}%
+\let\cleardoublepage\clearemptypage
+
+%%%%%%%%%%%%%
+%%  Fonts  %%
+%%%%%%%%%%%%%
+
+\usepackage{xltxtra,xunicode,fontspec}
+\defaultfontfeatures{Ligatures=TeX,Numbers={OldStyle,Proportional}}
+\setmainfont[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic]{texgyretermes}
+\newfontfamily{\greekfont}[
+  Scale=MatchLowercase,
+  Extension=.otf,
+  UprightFont=*,
+  BoldFont=*Bold,
+  ItalicFont=*Italic,
+  BoldItalicFont=*BoldItalic]{GFSDidot}
+
+\renewcommand{\@makefnmark}{%
+  \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
+\let\lnn\liningnums
+\usepackage[greek,american]{babel}
+\newcommand{\grk}[1]{\greekfont\foreignlanguage{greek}{#1}}%
+\usepackage{relsize}
+
+%%%%%%%%%%%%%
+%%  Notes  %%
+%%%%%%%%%%%%%
+
+\usepackage[backend=biber,style=windycity]{biblatex}
+\usepackage{csquotes}
+\bibliography{anthology}
+
+\renewcommand{\@makefntext}[1]{%
+  \parindent 1em%
+  \normalfont\@thefnmark.\hspace{0.4em}#1}%
+
+\long\def\nfootnote#1{%
+  \insert\footins{\normalfont\footnotesize
+  \interlinepenalty\interfootnotelinepenalty
+  \splittopskip\footnotesep
+  \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+  \hsize\columnwidth \@parboxrestore
+  \footnoterule
+  {\rule{\z@}{\footnotesep}\ignorespaces
+    #1\strut}}}
+
+\setlength{\bibhang}{1.1em}
+\defbibheading{bibliography}{%
+  \chapter*{Bibliography}
+  \addcontentsline{toc}{schapter}{Bibliography}
+  \markright{Bibliography}}%
+\defbibheading{references}{%
+  \chapter*{References}
+  \addcontentsline{toc}{schapter}{References}
+  \markright{References}}%
+
+% For marginal notes:
+\usepackage{marginnote}
+\renewcommand{\marginfont}{\small}%
+
+%%%%%%%%%%%%%%%%%%
+%%  Title Page  %%
+%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \leavevmode\vfil
+    \begin{center}
+      {\Huge\itshape\@title}%
+    \end{center}
+    \vfil\vfil\leavevmode
+    \clearpage
+  \end{titlepage}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Table of Contents  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{tocdepth}{0}% Include only chapters
+
+\renewcommand{\tableofcontents}{%
+  \cleardoublepage
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter*{\contentsname
+    \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
+  \@starttoc{toc}%
+  \if@restonecol\twocolumn\fi}%
+
+\renewcommand*{\l@chapter}[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.2ex \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}%
+
+\newcommand*{\l@schapter}[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode \itshape
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}%
+
+\newcounter{sectocnonumdepth}
+
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \if@mainmatter
+      \refstepcounter{chapter}%
+      \typeout{\@chapapp\space\thechapter.}%
+      \ifappendix
+        \ifoneappendix
+          \addcontentsline{toc}{chapter}{\appendixname:\space#1}%
+        \else
+          \addcontentsline{toc}{appchapter}{%
+            \appendixname\space\thechapter:\space#1}%
+        \fi
+      \else
+        \addcontentsline{toc}{chapter}%
+          {\protect\numberline{\thechapter}#1}%
+      \fi
+    \else
+      \addcontentsline{toc}{schapter}{#1}%
+    \fi
+  \else
+    \addcontentsline{toc}{chapter}{#1}%
+  \fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \if@twocolumn
+    \@topnewpage[\@makechapterhead{#2}]%
+  \else
+    \@makechapterhead{#2}%
+    \@afterheading
+  \fi}%
+
+\newif\ifappendix
+\newif\ifoneappendix
+\appendixfalse
+\oneappendixfalse
+\newcommand{\oneappendix}{\oneappendixtrue\appendix}%
+
+\renewcommand{\appendix}{\par
+  \setcounter{chapter}{0}%
+  \setcounter{figure}{0}%
+  \setcounter{section}{0}%
+  \setcounter{table}{0}%
+  \gdef\@chapapp{\appendixname}%
+  \gdef\thechapter{\@Alph\c@chapter}%
+  \appendixtrue}%
+
+\renewcommand{\backmatter}{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmatterfalse
+  \addtocontents{toc}{\vskip 1.0em}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Headers and Footers  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{\textit{#1}}{}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[CO]{\leftmark}
+\fancyhead[CE]{\itshape\@title}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%
+%%  Headings  %%
+%%%%%%%%%%%%%%%%
+
+\renewcommand{\@makechapterhead}[1]{{%
+  \thispagestyle{empty}
+  \vspace*{10pt}%
+  \begin{center}
+    \ifappendix
+      \ifoneappendix
+        {\LARGE\appendixname}%
+      \else
+        {\LARGE\appendixname\ \thechapter}%
+      \fi
+    \else
+      {\huge\thechapter}%
+    \fi
+    \par\nobreak
+    \vspace*{10pt}%
+    {\LARGE\itshape #1\par\normalfont\large\@textdate}%
+    \vskip 1.6em
+    {\large\@author\par\normalfont\normalsize\@authdate}%
+    \gdef\@textdate{}%
+    \gdef\@author{}%
+    \gdef\@authdate{}%
+  \end{center}
+  \vskip 34pt
+  \parindent 0pt}}%
+
+\setcounter{secnumdepth}{5} % Allow numbered paragraphs
+
+\renewcommand{\part}{%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{empty}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}%
+
+\renewcommand{\@schapter}[1]{%
+  \chaptermark{#1}% only difference from default
+  \if@twocolumn
+    \@topnewpage[\@makeschapterhead{#1}]%
+  \else
+    \@makeschapterhead{#1}%
+    \@afterheading
+  \fi}%
+
+\renewcommand{\@makeschapterhead}[1]{{%
+  \thispagestyle{empty}%
+  \begin{center}
+    \LARGE\itshape #1\nobreak
+  \end{center}
+  \vskip 34pt
+  \parindent 0pt}}%
+
+\renewcommand{\thechapter}{\addfontfeature{Numbers=Lining}%
+  \@arabic\c@chapter}%
+\renewcommand{\thesubsubsection}{%
+  \normalfont\normalsize\thesubsection.\@arabic\c@subsubsection}%
+
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\centering\normalfont\bfseries}}%
+
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+  {-3.5ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\centering\normalfont\itshape}}%
+
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+  {-3.5ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\centering\normalfont\itshape}}%
+
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+  {3.5ex \@plus1ex \@minus.2ex}%
+  {-0.5em}%
+  {\normalfont\small\MakeUppercase}}%
+
+\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\parindent}%
+  {3.5ex \@plus1ex \@minus .2ex}%
+  {-0.5em}%
+  {\normalfont\normalsize\itshape}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Original Source Page Breaks  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Checking for vertical mode below is necessary when '\page' occurs
+% after, say, a section heading.
+
+\newcommand{\page}[1]{%
+  \ifvmode
+    \ifdim\lastskip=0pt
+      \marginnote{#1}%
+    \else
+      \noindent\marginnote{#1}%
+    \fi
+  \else
+      \unskip
+      \cleaders\copy\brkbox\hskip\wd\brkbox
+      \marginnote{#1}\ignorespaces
+  \fi}%
+
+\newsavebox{\brkbox}%
+\sbox{\brkbox}{$\,|\,$}%
+
+%%%%%%%%%%%%%
+%%  Index  %%
+%%%%%%%%%%%%%
+
+\renewenvironment{theindex}
+  {\if@twocolumn
+     \@restonecolfalse
+   \else
+     \@restonecoltrue
+   \fi
+   \twocolumn[\@makeschapterhead{\indexname}]%
+   \@mkboth{\itshape\indexname}{\itshape\indexname}%
+   \phantomsection
+   \addcontentsline{toc}{schapter}{\indexname}
+   \small\raggedright
+   \parindent\z@
+   \parskip\z@ \@plus .3\p@\relax
+   \columnseprule \z@
+   \columnsep 35\p@
+   \let\item\@idxitem}
+  {\if@restonecol\onecolumn\else\clearpage\fi}%
+
+\renewcommand{\@idxitem}{\par\hangindent 2em}
+\renewcommand{\subitem}{\par\hangindent 3em \hspace*{1em}}
+\renewcommand{\subsubitem}{\par\hangindent 4em \hspace*{2em}}
+
+%%%%%%%%%%%%%
+%%  Links  %%
+%%%%%%%%%%%%%
+
+\newcommand{\authdate}[1]{\gdef\@authdate{(#1)}}%
+\newcommand{\textdate}[1]{\gdef\@textdate{(#1)}}%
+\gdef\@author{}%
+\gdef\@authdate{}%
+\gdef\@textdate{}%
+
+\renewcommand{\title}[1]{%
+  \gdef\@title{#1}%
+  \hypersetup{pdftitle=\@title}}%
+
+%%%%%%%%%%%%%%%%%%%%%
+%%  Miscellaneous  %%
+%%%%%%%%%%%%%%%%%%%%%
+
+\AtBeginEnvironment{description}{\small}
+\AtBeginEnvironment{quotation}{\small}
+\AtBeginEnvironment{quote}{\small}
+\AtBeginEnvironment{tabular}{\small}
+\AtBeginEnvironment{verse}{\small}
+\usepackage{graphicx}
+
+% Tables, etc.:
+\g@addto@macro\@floatboxreset\centering
+\usepackage{array}
+\usepackage{multicol,multirow}
+
+% Inset text and figures:
+\usepackage{wrapfig}
+\AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
+
+% Lists:
+\usepackage{enumitem}
+\setlist{noitemsep}
+\renewcommand{\labelitemii}{$\cdot$}
+
+% Change labels in the description environment:
+\renewcommand*{\descriptionlabel}[1]{\hspace\labelsep
+  \normalfont\bfseries #1:}%
+
+% For short chapter or section introductions, akin to abstracts:
+\newenvironment{intro}
+  {\quote}%
+  {\endquote\addvspace{30pt}}
+
+%%%%%%%%%%%%%%%%
+%%  Hyperref  %%
+%%%%%%%%%%%%%%%%
+
+\PassOptionsToPackage{%
+  anchorcolor=black,
+  breaklinks=true,
+  citecolor=black,
+  colorlinks=true,
+  linkcolor=black,
+  unicode,
+  xetex}{hyperref}%
+
+\ifcolorlinks
+  \PassOptionsToPackage{colorlinks,linkcolor=black,urlcolor=blue}{hyperref}%
+\else
+  \PassOptionsToPackage{colorlinks,linkcolor=black,urlcolor=black}{hyperref}%
+\fi
+\usepackage{hyperref}
+\urlstyle{same}% Put urls in normal font. Must not precede hyperref.
+
+\endinput
