@@ -1,4 +1,4 @@
-% Last modified: Thu 13 Mar 2014 03:58:23 PM EDT
+% Last modified: Tue 18 Mar 2014 02:44:31 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -388,13 +388,17 @@
 
 \newcommand{\authdate}[1]{\gdef\@authdate{(#1)}}%
 \newcommand{\textdate}[1]{\gdef\@textdate{(#1)}}%
+\newcommand{\version}[1]{\gdef\@version{\lnn{#1}}}%
 \gdef\@author{}%
 \gdef\@authdate{}%
 \gdef\@textdate{}%
+\gdef\@version{}%
 
 \renewcommand{\title}[1]{%
   \gdef\@title{#1}%
   \hypersetup{pdftitle=\@title}}%
+\newcommand{\printversion}{%
+  \small\emph{\@title}, version \@version}%
 
 %%%%%%%%%%%%%%%%%%%%%
 %%  Miscellaneous  %%
