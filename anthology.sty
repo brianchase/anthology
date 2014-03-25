@@ -1,4 +1,4 @@
-% Last modified: Thu 20 Mar 2014 06:15:28 PM EDT
+% Last modified: Tue 25 Mar 2014 10:55:01 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -7,15 +7,12 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{anthology}
-\RequirePackage{etoolbox,ifthen}
+\RequirePackage{etoolbox}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %%  Package Options  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\newif\ifcolorlinks % If true, links have color
-\DeclareOption{colorlinks}{\colorlinkstrue}
-% Options for Windy City:
 \DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{collsonly}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{firstshort}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
@@ -436,21 +433,14 @@
 %%  Hyperref  %%
 %%%%%%%%%%%%%%%%
 
-\PassOptionsToPackage{%
+\usepackage[%
   anchorcolor=black,
   breaklinks=true,
   citecolor=black,
   colorlinks=true,
   linkcolor=black,
   unicode,
-  xetex}{hyperref}%
-
-\ifcolorlinks
-  \PassOptionsToPackage{colorlinks,linkcolor=black,urlcolor=blue}{hyperref}%
-\else
-  \PassOptionsToPackage{colorlinks,linkcolor=black,urlcolor=black}{hyperref}%
-\fi
-\usepackage{hyperref}
+  urlcolor=black]{hyperref}
 \urlstyle{same}% Put urls in normal font. Must not precede hyperref.
 
 \endinput
