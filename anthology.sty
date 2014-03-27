@@ -1,4 +1,4 @@
-% Last modified: Thu 27 Mar 2014 04:02:20 PM EDT
+% Last modified: Thu 27 Mar 2014 04:46:03 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -235,18 +235,6 @@
 
 \setcounter{secnumdepth}{5} % Allow numbered paragraphs
 
-\renewcommand{\part}{%
-  \if@openright\cleardoublepage\else\clearpage\fi
-  \thispagestyle{empty}%
-  \if@twocolumn
-    \onecolumn
-    \@tempswatrue
-  \else
-    \@tempswafalse
-  \fi
-  \null\vfil
-  \secdef\@part\@spart}%
-
 \renewcommand{\@schapter}[1]{%
   \chaptermark{#1}% only difference from default
   \if@twocolumn
@@ -359,7 +347,8 @@
   \gdef\@title{#1}%
   \hypersetup{pdftitle=\@title}}%
 \newcommand{\printversion}{%
-  {\small\emph{\@title}, version \@version}}%
+  \noindent\parbox{0.7\textwidth}{%
+    \small\emph{\@title}, version \@version}}%
 
 %%%%%%%%%%%%%%%%%%%%%
 %%  Miscellaneous  %%
