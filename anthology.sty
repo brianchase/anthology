@@ -1,4 +1,4 @@
-% Last modified: Tue 25 Mar 2014 10:55:01 AM EDT
+% Last modified: Thu 27 Mar 2014 04:02:20 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -7,7 +7,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{anthology}
-\RequirePackage{etoolbox}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %%  Package Options  %%
@@ -173,17 +172,7 @@
     \if@mainmatter
       \refstepcounter{chapter}%
       \typeout{\@chapapp\space\thechapter.}%
-      \ifappendix
-        \ifoneappendix
-          \addcontentsline{toc}{chapter}{\appendixname:\space#1}%
-        \else
-          \addcontentsline{toc}{appchapter}{%
-            \appendixname\space\thechapter:\space#1}%
-        \fi
-      \else
-        \addcontentsline{toc}{chapter}%
-          {\protect\numberline{\thechapter}#1}%
-      \fi
+      \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}%
     \else
       \addcontentsline{toc}{schapter}{#1}%
     \fi
@@ -199,21 +188,6 @@
     \@makechapterhead{#2}%
     \@afterheading
   \fi}%
-
-\newif\ifappendix
-\newif\ifoneappendix
-\appendixfalse
-\oneappendixfalse
-\newcommand{\oneappendix}{\oneappendixtrue\appendix}%
-
-\renewcommand{\appendix}{\par
-  \setcounter{chapter}{0}%
-  \setcounter{figure}{0}%
-  \setcounter{section}{0}%
-  \setcounter{table}{0}%
-  \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}%
-  \appendixtrue}%
 
 \renewcommand{\backmatter}{%
   \if@openright
@@ -246,15 +220,7 @@
   \thispagestyle{empty}
   \vspace*{10pt}%
   \begin{center}
-    \ifappendix
-      \ifoneappendix
-        {\LARGE\appendixname}%
-      \else
-        {\LARGE\appendixname\ \thechapter}%
-      \fi
-    \else
-      {\huge\thechapter}%
-    \fi
+    {\huge\thechapter}%
     \par\nobreak
     \vspace*{10pt}%
     {\LARGE\itshape #1\par\normalfont\large\@textdate}%
