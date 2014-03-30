@@ -1,4 +1,4 @@
-% Last modified: Thu 27 Mar 2014 04:46:03 PM EDT
+% Last modified: Sun 30 Mar 2014 11:38:52 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -304,32 +304,6 @@
 
 \newsavebox{\brkbox}%
 \sbox{\brkbox}{$\,|\,$}%
-
-%%%%%%%%%%%%%
-%%  Index  %%
-%%%%%%%%%%%%%
-
-\renewenvironment{theindex}
-  {\if@twocolumn
-     \@restonecolfalse
-   \else
-     \@restonecoltrue
-   \fi
-   \twocolumn[\@makeschapterhead{\indexname}]%
-   \@mkboth{\itshape\indexname}{\itshape\indexname}%
-   \phantomsection
-   \addcontentsline{toc}{schapter}{\indexname}
-   \small\raggedright
-   \parindent\z@
-   \parskip\z@ \@plus .3\p@\relax
-   \columnseprule \z@
-   \columnsep 35\p@
-   \let\item\@idxitem}
-  {\if@restonecol\onecolumn\else\clearpage\fi}%
-
-\renewcommand{\@idxitem}{\par\hangindent 2em}
-\renewcommand{\subitem}{\par\hangindent 3em \hspace*{1em}}
-\renewcommand{\subsubitem}{\par\hangindent 4em \hspace*{2em}}
 
 %%%%%%%%%%%%%
 %%  Links  %%
