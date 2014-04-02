@@ -1,4 +1,4 @@
-% Last modified: Sun 30 Mar 2014 11:38:52 AM EDT
+% Last modified: Wed 02 Apr 2014 12:54:21 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -67,6 +67,8 @@
 \usepackage[greek,american]{babel}
 \newcommand{\grk}[1]{\greekfont\foreignlanguage{greek}{#1}}%
 \usepackage{relsize}
+\newcommand{\BCE}{\textsmaller{BCE}}%
+\newcommand{\CE}{\textsmaller{CE}}%
 
 %%%%%%%%%%%%%
 %%  Notes  %%
@@ -80,6 +82,14 @@
   \parindent 1em%
   \normalfont\@thefnmark.\hspace{0.4em}#1}%
 
+\newcommand{\source}{%
+  \@ifstar
+    {\@ifnextchar[{\xfootnote}{\xfootnote[]}}%
+    {\@ifnextchar[{\yfootnote}{\yfootnote[]}}}
+\def\xfootnote[#1]#2{%
+  \nfootnote{Republished~from~\fullcite*[#1]{#2}}}
+\def\yfootnote[#1]#2{%
+  \nfootnote{Republished~from~\fullcite[#1]{#2}}}
 \long\def\nfootnote#1{%
   \insert\footins{\normalfont\footnotesize
   \interlinepenalty\interfootnotelinepenalty
@@ -172,7 +182,11 @@
     \if@mainmatter
       \refstepcounter{chapter}%
       \typeout{\@chapapp\space\thechapter.}%
-      \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}%
+      \ifdefempty{\@author}
+        {\addcontentsline{toc}{chapter}{%
+           \protect\numberline{\thechapter}#1}}%
+        {\addcontentsline{toc}{chapter}{%
+           \protect\numberline{\thechapter}\@author~--~#1}}%
     \else
       \addcontentsline{toc}{schapter}{#1}%
     \fi
@@ -223,12 +237,13 @@
     {\huge\thechapter}%
     \par\nobreak
     \vspace*{10pt}%
-    {\LARGE\itshape #1\par\normalfont\large\@textdate}%
+    {\LARGE\itshape #1\par\@addon\par\normalfont\large\@textdate}%
     \vskip 1.6em
     {\large\@author\par\normalfont\normalsize\@authdate}%
     \gdef\@textdate{}%
     \gdef\@author{}%
     \gdef\@authdate{}%
+    \gdef\@addon{}%
   \end{center}
   \vskip 34pt
   \parindent 0pt}}%
@@ -305,9 +320,9 @@
 \newsavebox{\brkbox}%
 \sbox{\brkbox}{$\,|\,$}%
 
-%%%%%%%%%%%%%
-%%  Links  %%
-%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Fields and Links  %%
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\authdate}[1]{\gdef\@authdate{(#1)}}%
 \newcommand{\textdate}[1]{\gdef\@textdate{(#1)}}%
@@ -316,6 +331,10 @@
 \gdef\@authdate{}%
 \gdef\@textdate{}%
 \gdef\@version{}%
+
+\newcommand{\addon}{\@ifnextchar[{\xaddon}{\xaddon[]}}%
+\def\xaddon[#1]#2{\gdef\@addon{\Large #2\par\large #1}}%
+\gdef\@addon{}%
 
 \renewcommand{\title}[1]{%
   \gdef\@title{#1}%
