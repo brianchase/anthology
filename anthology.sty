@@ -1,4 +1,4 @@
-% Last modified: Wed 02 Apr 2014 12:54:21 PM EDT
+% Last modified: Thu 03 Apr 2014 02:02:22 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -60,15 +60,10 @@
   BoldFont=*Bold,
   ItalicFont=*Italic,
   BoldItalicFont=*BoldItalic]{GFSDidot}
-
-\renewcommand{\@makefnmark}{%
-  \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
 \let\lnn\liningnums
 \usepackage[greek,american]{babel}
-\newcommand{\grk}[1]{\greekfont\foreignlanguage{greek}{#1}}%
+\newcommand{\grk}[1]{{\greekfont\foreignlanguage{greek}{#1}}}
 \usepackage{relsize}
-\newcommand{\BCE}{\textsmaller{BCE}}%
-\newcommand{\CE}{\textsmaller{CE}}%
 
 %%%%%%%%%%%%%
 %%  Notes  %%
@@ -347,39 +342,27 @@
 %%  Miscellaneous  %%
 %%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{enumitem}% For lists
+\usepackage{graphicx}% For images
+\usepackage{multicol}% For multi-column text
+\usepackage{wrapfig}% For inset text and figures
+
+\renewcommand{\@makefnmark}{%
+  \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
+\newcommand{\BCE}{\textsmaller{BCE}}%
+\newcommand{\CE}{\textsmaller{CE}}%
+
 \AtBeginEnvironment{description}{\small}
 \AtBeginEnvironment{quotation}{\small}
 \AtBeginEnvironment{quote}{\small}
 \AtBeginEnvironment{tabular}{\small}
 \AtBeginEnvironment{verse}{\small}
-\usepackage{graphicx}
-
-% Tables, etc.:
-\g@addto@macro\@floatboxreset\centering
-\usepackage{array}
-\usepackage{multicol,multirow}
-
-% Inset text and figures:
-\usepackage{wrapfig}
 \AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
-
-% Lists:
-\usepackage{enumitem}
 \setlist{noitemsep}
-\renewcommand{\labelitemii}{$\cdot$}
 
 % Change labels in the description environment:
 \renewcommand*{\descriptionlabel}[1]{\hspace\labelsep
   \normalfont\bfseries #1:}%
-
-% For short chapter or section introductions, akin to abstracts:
-\newenvironment{intro}
-  {\quote}%
-  {\endquote\addvspace{30pt}}
-
-%%%%%%%%%%%%%%%%
-%%  Hyperref  %%
-%%%%%%%%%%%%%%%%
 
 \usepackage[%
   anchorcolor=black,
