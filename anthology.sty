@@ -1,4 +1,4 @@
-% Last modified: Thu 03 Apr 2014 02:02:22 PM EDT
+% Last modified: Sat 05 Apr 2014 10:35:17 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -335,8 +335,9 @@
   \gdef\@title{#1}%
   \hypersetup{pdftitle=\@title}}%
 \newcommand{\printversion}{%
-  \noindent\parbox{0.7\textwidth}{%
-    \small\emph{\@title}, version \@version}}%
+  \begin{center}
+    {\small\emph{\@title}\\version \@version}%
+  \end{center}}%
 
 %%%%%%%%%%%%%%%%%%%%%
 %%  Miscellaneous  %%
