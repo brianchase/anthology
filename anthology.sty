@@ -1,4 +1,4 @@
-% Last modified: Sat 13 Sep 2014 02:40:22 PM EDT
+% Last modified: Wed 01 Oct 2014 03:35:34 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -24,16 +24,9 @@
 
 \frenchspacing                % French spacing after punctuation
 \setlength{\parindent}{1.1em} % Indent paragraphs by this value
-\widowpenalty=1000            % Reduce but don't prohibit widows
+\widowpenalty=1500            % Reduce but don't prohibit widows
 \clubpenalty=1000             % Reduce but don't prohibit orphans
-
-\if@twocolumn % Vertical justification only if '@twocolumntrue'
-  \usepackage{fixltx2e}% Address other issues with two columns
-  \setlength{\columnsep}{20pt}% Separate columns by this value
-  \flushbottom
-\else
-  \raggedbottom
-\fi
+\raggedbottom                 % Allow page height to vary
 
 % Change 'cleardoublepage' to allow blank pages:
 \renewcommand{\cleardoublepage}{%
@@ -294,24 +287,19 @@
 %%  Original Source Page Breaks  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Checking for vertical mode below is necessary when '\page' occurs
-% after, say, a section heading.
-
 \newcommand{\page}[1]{%
   \ifvmode
-    \ifdim\lastskip=0pt
+    \if@nobreak
       \marginnote{#1}%
+      \@afterindentfalse\@afterheading
     \else
-      \ifthenelse{\equal{verse}{\@currenvir}}
-        {\marginnote{#1}}%
-        {\noindent\marginnote{#1}}%
+      \marginnote{#1}%
     \fi
   \else
-      \unskip
-      \cleaders\copy\brkbox\hskip\wd\brkbox
-      \marginnote{#1}\ignorespaces
+    \unskip
+    \cleaders\copy\brkbox\hskip\wd\brkbox
+    \marginnote{#1}\ignorespaces
   \fi}%
-
 \newsavebox{\brkbox}%
 \sbox{\brkbox}{$\,|\,$}%
 
