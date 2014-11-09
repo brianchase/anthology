@@ -1,4 +1,4 @@
-% Last modified: Wed 01 Oct 2014 03:35:34 PM EDT
+% Last modified: Sun 09 Nov 2014 04:09:11 PM EST
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -287,13 +287,22 @@
 %%  Original Source Page Breaks  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% FIX: This version addresses some issues but is still experimental. A
+% new version will replace it.
+
 \newcommand{\page}[1]{%
   \ifvmode
     \if@nobreak
       \marginnote{#1}%
       \@afterindentfalse\@afterheading
     \else
-      \marginnote{#1}%
+% The next two '\ifdim' have the same effect:
+%      \ifdim\lastskip>\normallineskip
+      \ifdim\lastskip>\parskip
+        \marginnote{#1}%
+      \else
+        \leavevmode\marginnote{#1}%
+      \fi
     \fi
   \else
     \unskip
