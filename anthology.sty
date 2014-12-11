@@ -1,4 +1,4 @@
-% Last modified: Sun 09 Nov 2014 04:09:11 PM EST
+% Last modified: Thu 11 Dec 2014 10:55:00 AM EST
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -287,21 +287,23 @@
 %%  Original Source Page Breaks  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% FIX: This version addresses some issues but is still experimental. A
-% new version will replace it.
-
+% The command below is from marginnote.sty. Adding '\nobreak' prevents
+% page breaks between notes and paragraphs when '\marginnote' runs at
+% the beginning of a line:
+\renewcommand{\mn@vlap}[1]{%
+  \setbox\@tempboxa\vbox to \ht\strutbox{#1\vss}%
+  \box\@tempboxa\nobreak\vskip-\baselineskip
+}%
 \newcommand{\page}[1]{%
   \ifvmode
     \if@nobreak
       \marginnote{#1}%
       \@afterindentfalse\@afterheading
     \else
-% The next two '\ifdim' have the same effect:
-%      \ifdim\lastskip>\normallineskip
-      \ifdim\lastskip>\parskip
-        \marginnote{#1}%
+      \ifdim\lastskip=\z@
+        \marginnote{#1}\nobreak
       \else
-        \leavevmode\marginnote{#1}%
+        \marginnote{#1}%
       \fi
     \fi
   \else
