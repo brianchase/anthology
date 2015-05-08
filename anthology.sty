@@ -1,4 +1,4 @@
-% Last modified: Sat 02 May 2015 12:54:17 PM EDT
+% Last modified: Fri 08 May 2015 11:21:02 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -65,6 +65,7 @@
 \usepackage{csquotes}
 \bibliography{anthology}
 
+\usepackage[stable]{footmisc}
 \renewcommand{\@makefntext}[1]{%
   \parindent 1em%
   \normalfont\@thefnmark.\hspace{0.4em}#1}%
@@ -135,7 +136,7 @@
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \vskip 1.2ex \@plus\p@
+    \vskip 1.4ex \@plus\p@
     \setlength\@tempdima{1.5em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
@@ -223,7 +224,7 @@
     {\huge\thechapter}%
     \par\nobreak
     \vspace*{10pt}%
-    {\LARGE\itshape #1\par\large\@addon\par\normalfont\@textdate}%
+    {\LARGE\itshape #1\par\@addon\par\normalfont\@textdate}%
     \vskip 1.6em
     {\large\@author\par\normalfont\normalsize\@authdate}%
     \gdef\@textdate{}%
@@ -327,7 +328,7 @@
 \gdef\@version{}%
 
 \newcommand{\addon}{\@ifnextchar[{\xaddon}{\xaddon[]}}%
-\def\xaddon[#1]#2{\gdef\@addon{#2\par#1}}%
+\def\xaddon[#1]#2{\gdef\@addon{\Large#2\par\large#1}}%
 \gdef\@addon{}%
 
 \renewcommand{\title}[1]{%
@@ -346,12 +347,19 @@
 \usepackage{graphicx}% For images
 \usepackage{multicol}% For multi-column text
 \usepackage{wrapfig}% For inset text and figures
+\usepackage{verse}
 
 \renewcommand{\@makefnmark}{%
   \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
 \newcommand{\BCE}{\textsmaller{BCE}}%
 \newcommand{\CE}{\textsmaller{CE}}%
 \newcommand{\wrapadj}{\raggedright\hspace{1em}}
+\newenvironment{abstract}[1][]
+  {\begin{center}\textsc{#1}\end{center}\begin{quote}}%
+  {\end{quote}}%
+\newcommand{\attrib}[1]{%
+  \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
+\renewcommand{\poemtitlefont}{\scshape\centering}%
 
 \AtBeginEnvironment{description}{\small}
 \AtBeginEnvironment{quotation}{\small}
@@ -361,6 +369,9 @@
 \AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
 
 \setlist{noitemsep}
+\setlength{\vgap}{\parindent}
+\setlength{\vleftskip}{\parindent}
+\hyphenation{Hough-ton}% needed for bibliography
 
 % Change labels in the description environment:
 \renewcommand*{\descriptionlabel}[1]{\hspace\labelsep
