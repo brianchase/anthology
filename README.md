@@ -7,8 +7,8 @@ carefully edited against the sources cited in the anthology. Since my
 focus is on adding texts and, to a lesser extent, developing the
 layout, the project includes no introduction or other explanatory
 material. This may change someday. A compiled version of the anthology
-is [available here](http://hesperusisphosphorus.com/prj/anthology.pdf)
-(PDF).
+is [available
+here](http://hesperusisphosphorus.com/projects/anthology.pdf) (PDF).
 
 # LICENSE
 
