@@ -1,4 +1,4 @@
-% Last modified: Tue 26 May 2015 12:06:28 PM EDT
+% Last modified: Tue 26 May 2015 02:30:17 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -29,7 +29,12 @@
 \setlength{\parindent}{1.1em} % Indent paragraphs by this value
 \widowpenalty=1500            % Reduce but don't prohibit widows
 \clubpenalty=1000             % Reduce but don't prohibit orphans
-\raggedbottom                 % Allow page height to vary
+\if@twocolumn
+  \usepackage{fixltx2e}
+  \flushbottom
+\else
+  \raggedbottom
+\fi
 
 % Change 'cleardoublepage' to allow blank pages:
 \renewcommand{\cleardoublepage}{%
