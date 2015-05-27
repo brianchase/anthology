@@ -1,4 +1,4 @@
-% Last modified: Tue 26 May 2015 05:11:08 PM EDT
+% Last modified: Wed 27 May 2015 10:51:45 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -12,7 +12,9 @@
 %%  Package Options  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
+\newif\if@eptfont
 \newif\if@letterpaper
+\DeclareOption{11pt}{\@eptfonttrue}
 \DeclareOption{a4paper}{\@letterpapertrue}
 \DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{collsonly}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
@@ -29,12 +31,15 @@
 \setlength{\parindent}{1.1em} % Indent paragraphs by this value
 \widowpenalty=1500            % Reduce but don't prohibit widows
 \clubpenalty=1000             % Reduce but don't prohibit orphans
-\if@twocolumn
-  \usepackage{fixltx2e}
+\if@twocolumn % Vertical justification only if '@twocolumntrue'
+  \usepackage{fixltx2e}% Address other issues with two columns
   \flushbottom
 \else
   \raggedbottom
 \fi
+
+% Use '\sloppy' unless in 11pt font:
+\if@eptfont\else\sloppy\fi
 
 % Change 'cleardoublepage' to allow blank pages:
 \renewcommand{\cleardoublepage}{%
@@ -335,15 +340,13 @@
 \usepackage{graphicx}% For images
 \usepackage{multicol}% For multi-column text
 \usepackage{wrapfig}% For inset text and figures
-\usepackage{verse}
-
-% Accommodate different paper sizes:
-\newcommand{\llb}{\if@letterpaper\linebreak[4]\fi}%
+\usepackage{verse}% Handy for longer poems
 
 \renewcommand{\@makefnmark}{%
   \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
 \newcommand{\BCE}{\textsmaller{BCE}}%
 \newcommand{\CE}{\textsmaller{CE}}%
+\newcommand{\llb}{\if@eptfont\if@letterpaper\linebreak[4]\fi\fi}%
 \newcommand{\wrapadj}{\raggedright\hspace{1em}}
 \newenvironment{abstract}[1][]
   {\begin{center}\textsc{#1}\end{center}\small}%
