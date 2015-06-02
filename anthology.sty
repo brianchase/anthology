@@ -1,4 +1,4 @@
-% Last modified: Wed 27 May 2015 10:51:45 AM EDT
+% Last modified: Tue 02 Jun 2015 11:23:54 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -223,7 +223,6 @@
 
 \renewcommand{\@makechapterhead}[1]{{%
   \thispagestyle{empty}
-  \vspace*{10pt}%
   \begin{center}
     {\huge\thechapter}%
     \par\nobreak
@@ -353,7 +352,6 @@
   {}%
 \newcommand{\attrib}[1]{%
   \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
-\renewcommand{\poemtitlefont}{\scshape\centering}%
 
 \AtBeginEnvironment{description}{\small}
 \AtBeginEnvironment{quotation}{\small}
@@ -363,13 +361,13 @@
 \AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
 
 \setlist{noitemsep}
+\newcommand{\addcolon}[1]{#1:}%
+\setlist[description]{font=\bfseries,format=\addcolon}
+\setlength{\beforepoemtitleskip}{0em}
+\renewcommand{\poemtitlefont}{\scshape\centering}%
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
-\hyphenation{Hough-ton}% needed for bibliography
-
-% Change labels in the description environment:
-\renewcommand*{\descriptionlabel}[1]{\hspace\labelsep
-  \normalfont\bfseries #1:}%
+\hyphenation{Hough-ton}% for citations
 
 % Pass 'width=\maxwidth' to includegraphics:
 \newcommand{\maxwidth}{%
