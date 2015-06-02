@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Jun 2015 11:23:54 AM EDT
+% Last modified: Tue 02 Jun 2015 11:24:01 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -12,14 +12,16 @@
 %%  Package Options  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
+\newif\if@ebook
 \newif\if@eptfont
 \newif\if@letterpaper
 \DeclareOption{11pt}{\@eptfonttrue}
-\DeclareOption{a4paper}{\@letterpapertrue}
+\DeclareOption{a4paper}{\@letterpapertrue\@ebookfalse}
 \DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{collsonly}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\DeclareOption{ebook}{\@ebooktrue\@letterpaperfalse\@twocolumnfalse}
 \DeclareOption{firstshort}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
-\DeclareOption{letterpaper}{\@letterpapertrue}
+\DeclareOption{letterpaper}{\@letterpapertrue\@ebookfalse}
 \DeclareOption{reflist}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \ProcessOptions
 
@@ -31,20 +33,37 @@
 \setlength{\parindent}{1.1em} % Indent paragraphs by this value
 \widowpenalty=1500            % Reduce but don't prohibit widows
 \clubpenalty=1000             % Reduce but don't prohibit orphans
-\if@twocolumn % Vertical justification only if '@twocolumntrue'
+\if@twocolumn % Vertical justification if '@twocolumntrue'
   \usepackage{fixltx2e}% Address other issues with two columns
   \flushbottom
 \else
   \raggedbottom
 \fi
 
-% Use '\sloppy' unless in 11pt font:
-\if@eptfont\else\sloppy\fi
+% Use '\sloppy' with options ebook, 10pt, and 12pt:
+\if@ebook\sloppy\else\if@eptfont\else\sloppy\fi\fi
 
 % Change 'cleardoublepage' to allow blank pages:
 \renewcommand{\cleardoublepage}{%
   \clearpage\thispagestyle{empty}\if@twoside \ifodd\c@page\else
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}%
+
+% Basic layout for ebooks: Among other things, horizontally center the
+% text body. Vertically center the area from the top of the header to
+% the bottom of the text body.
+\if@ebook
+  \setlength\paperheight{8.5in}
+  \setlength\paperwidth{5.5in}
+  \setlength\evensidemargin{-30pt}
+  \setlength\headheight{14pt}
+  \setlength\headsep{8pt}
+  \setlength\marginparsep{8pt}
+  \setlength\marginparwidth{30pt}
+  \setlength\oddsidemargin{-30pt}
+  \setlength\textheight{38\baselineskip}
+  \setlength\textwidth{312pt}
+  \setlength\topmargin{-34pt}
+\fi
 
 %%%%%%%%%%%%%
 %%  Fonts  %%
@@ -128,7 +147,7 @@
 %%  Table of Contents  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setcounter{tocdepth}{0}% Include only chapters
+\setcounter{tocdepth}{0}%
 \renewcommand{\tableofcontents}{%
   \cleardoublepage
   \if@twocolumn
@@ -140,6 +159,7 @@
     \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
   \@starttoc{toc}%
   \if@restonecol\twocolumn\fi}%
+\renewcommand{\@pnumwidth}{3.8em}%
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -287,8 +307,7 @@
 % the beginning of a line:
 \renewcommand{\mn@vlap}[1]{%
   \setbox\@tempboxa\vbox to \ht\strutbox{#1\vss}%
-  \box\@tempboxa\nobreak\vskip-\baselineskip
-}%
+  \box\@tempboxa\nobreak\vskip-\baselineskip}%
 \newcommand{\page}[1]{%
   \ifvmode
     \if@nobreak
@@ -367,7 +386,7 @@
 \renewcommand{\poemtitlefont}{\scshape\centering}%
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
-\hyphenation{Hough-ton}% for citations
+\hyphenation{mor-als Hough-ton Wil-liam}% for citations
 
 % Pass 'width=\maxwidth' to includegraphics:
 \newcommand{\maxwidth}{%
