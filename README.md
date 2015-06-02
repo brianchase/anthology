@@ -1,15 +1,15 @@
 # ABOUT
 
-This project aims to provide a free, open anthology of readings for
-courses in philosophy, drawing exclusively on works in the public
-domain. The selection of texts cover every major period of Western
+This project aims to provide a free, open anthology of readings in the
+history of Western philosophy, drawing exclusively on works in the
+public domain. The selections cover every major period of Western
 philosophy through the early twentieth century. Since my focus is on
 adding and editing texts and, to a lesser extent, developing the
-layout, the anthology contains no introduction or other explanatory
+style, the anthology contains no introduction or other explanatory
 material. This may change someday.
 
 The project's style file, `anthology.sty`, permits different layouts.
-For the most part, however, I focus on two: a one column layout for
+For the most part, however, I work on two: a one column layout for
 letter paper, which is largely the same as that for A5 paper, and a
 one column ebook layout for half letter paper (8.5 × 5.5 in). Current
 binaries of the anthology are available at these links:
@@ -21,18 +21,19 @@ binaries of the anthology are available at these links:
 
 The anthology contains over fifty texts of widely varying lengths. I
 don't intend it as representative of Western philosophy. Nor do I
-select a text with much focus on whether it's representative of that
-figure or in some way historically important. I don't even worry about
-whether the figure typically counts as a philosopher. Some selections
-caught my attention because I find them entertaining, like the ones
-from Gellius, Stevenson, and Twain. Others represent a genre of sorts
-or have been useful for stimulating discussion in class. Still others
-merely demonstrate what sort of material is available in the public
-domain, even if I'd always prefer to assign contemporary editions of
-those texts. And finally, I've added some texts because they might
-serve, or have served, as primary or supplemental readings for my
-courses. Perhaps I'll add a dozen or so texts before considering the
-anthology complete. In any case, the list below is current:
+select a text with much thought about whether it's representative of
+that figure or in some way historically important. I don't even worry
+about whether the figure typically counts as a philosopher. Some
+selections caught my attention because I find them entertaining, like
+the ones from Gellius, Stevenson, and Twain. Others represent a genre
+of sorts or have been useful for stimulating discussion in class.
+Still others merely demonstrate what sort of material is available in
+the public domain, even if I'd always prefer to assign contemporary
+editions of those texts. And finally, I've added some texts because
+they might serve, or have served, as primary or supplemental readings
+for my courses. Perhaps I'll add a dozen or so texts before
+considering the anthology complete. In any case, the list below is
+current:
 
 1. Thucydides – Pericles' Funeral Oration
 1. Plato – Euthyphro
