@@ -99,16 +99,16 @@ official repositories at [Arch Linux](https://www.archlinux.org/),
 since that's my distribution of choice. In addition, the style
 compiles with [XeTeX](http://en.wikipedia.org/wiki/XeTeX), which is
 available with TeX Live, and [Windy
-City](http://github.com/brianchase/windycity), which doesn't. The
+City](http://github.com/brianchase/windycity), which isn't. The
 latter is my own style for
-[biblatex](http://www.ctan.org/pkg/biblatex), which formats notes and
-bibliographies. Although biblatex comes with TeX Live, I often, but
-not always, use a more recent version of it. This isn't likely to
-cause problems if you try to compile the anthology on your own system,
-but it's possible. In short, the requirements are:
+[biblatex](http://www.ctan.org/pkg/biblatex) and formats the citations
+in the text. Although biblatex comes with TeX Live, I often, but not
+always, use a more recent version of it. This isn't likely to cause
+problems if you try to compile the anthology on your own system, but
+it's possible. In short, the requirements are:
 
 * [TeX Live](http://www.tug.org/texlive) with [XeTeX](http://en.wikipedia.org/wiki/XeTeX)
-* [Windy City](http://github.com/brianchase/windycity) for [biblatex](http://www.ctan.org/pkg/biblatex)
+* [Windy City](http://github.com/brianchase/windycity) with [biblatex](http://www.ctan.org/pkg/biblatex)
 
 # LICENSE
 
