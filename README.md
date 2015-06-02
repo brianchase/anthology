@@ -101,8 +101,8 @@ compiles with [XeTeX](http://en.wikipedia.org/wiki/XeTeX), which is
 available with TeX Live, and [Windy
 City](http://github.com/brianchase/windycity), which isn't. The
 latter is my own style for
-[biblatex](http://www.ctan.org/pkg/biblatex) and formats the citations
-in the text. Although biblatex comes with TeX Live, I often, but not
+[biblatex](http://www.ctan.org/pkg/biblatex) and formats citations in
+the text. Although biblatex comes with TeX Live, I often, but not
 always, use a more recent version of it. This isn't likely to cause
 problems if you try to compile the anthology on your own system, but
 it's possible. In short, the requirements are:
