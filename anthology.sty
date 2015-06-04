@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Jun 2015 11:24:01 AM EDT
+% Last modified: Thu 04 Jun 2015 04:33:16 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -147,7 +147,7 @@
 %%  Table of Contents  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setcounter{tocdepth}{0}%
+\setcounter{tocdepth}{0}
 \renewcommand{\tableofcontents}{%
   \cleardoublepage
   \if@twocolumn
@@ -159,26 +159,26 @@
     \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
   \@starttoc{toc}%
   \if@restonecol\twocolumn\fi}%
-\renewcommand{\@pnumwidth}{3.8em}%
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \vskip 1.4ex \@plus\p@
-    \setlength\@tempdima{1.5em}%
+    \vskip 1ex \@plus\p@
+    \setlength\@tempdima{1.6em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
       \leavevmode
       \advance\leftskip\@tempdima
       \hskip -\leftskip
-      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \hangindent=1.1em\hangafter=1{#1\nobreak\hfil
+      \nobreak\hb@xt@\@pnumwidth{\hss #2}}\par
       \penalty\@highpenalty
     \endgroup
   \fi}%
 \newcommand*{\l@schapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \setlength\@tempdima{1.5em}%
+    \setlength\@tempdima{1.6em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
@@ -198,7 +198,8 @@
         {\addcontentsline{toc}{chapter}{%
            \protect\numberline{\thechapter}#1}}%
         {\addcontentsline{toc}{chapter}{%
-           \protect\numberline{\thechapter}\@author~--~#1}}%
+           \protect\numberline{\thechapter}#1\\
+           \itshape\@author}}%
     \else
       \addcontentsline{toc}{schapter}{#1}%
     \fi
@@ -244,7 +245,7 @@
 \renewcommand{\@makechapterhead}[1]{{%
   \thispagestyle{empty}
   \begin{center}
-    {\huge\thechapter}%
+    {\addfontfeature{Numbers=Lining}\huge\thechapter}%
     \par\nobreak
     \vspace*{10pt}%
     {\LARGE\itshape #1\par\@addon\par\normalfont\large\@textdate}%
@@ -273,8 +274,8 @@
   \end{center}
   \vskip 34pt
   \parindent 0pt}}%
-\renewcommand{\thechapter}{\addfontfeature{Numbers=Lining}%
-  \@arabic\c@chapter}%
+%\renewcommand{\thechapter}{\addfontfeature{Numbers=Lining}%
+%  \@arabic\c@chapter}%
 \renewcommand{\thesubsubsection}{%
   \normalfont\normalsize\thesubsection.\@arabic\c@subsubsection}%
 \renewcommand{\section}{\@startsection{section}{1}{\z@}%
