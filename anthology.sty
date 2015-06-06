@@ -1,4 +1,4 @@
-% Last modified: Fri 05 Jun 2015 04:32:19 PM EDT
+% Last modified: Sat 06 Jun 2015 01:17:46 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -274,8 +274,6 @@
   \end{center}
   \vskip 34pt
   \parindent 0pt}}%
-%\renewcommand{\thechapter}{\addfontfeature{Numbers=Lining}%
-%  \@arabic\c@chapter}%
 \renewcommand{\thesubsubsection}{%
   \normalfont\normalsize\thesubsection.\@arabic\c@subsubsection}%
 \renewcommand{\section}{\@startsection{section}{1}{\z@}%
@@ -304,27 +302,50 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % The command below is from marginnote.sty. Adding '\nobreak' prevents
-% page breaks between notes and paragraphs when '\marginnote' runs at
-% the beginning of a line:
+% a page break between '\marginnote' and the text that follows it.
 \renewcommand{\mn@vlap}[1]{%
   \setbox\@tempboxa\vbox to \ht\strutbox{#1\vss}%
   \box\@tempboxa\nobreak\vskip-\baselineskip}%
 \newcommand{\page}[1]{%
+  \renewcommand{\mypage}{#1}%
+  \futurelet\mytoken\pageparse}%
+\newcommand{\mypage}{}%
+\newcommand{\pageparse}{%
+  \ifx\mytoken\section\pagew\else\pagex\fi}%
+\newcommand{\pagew}{%
+  \if@nobreak
+    \marginnote{\mypage}%
+  \else
+    \vspace{\sectionskip}%
+    \marginnote{\mypage}\nobreak
+  \fi
+  \@afterindentfalse\@afterheading}%
+\newlength{\sectionskip}%
+\setlength{\sectionskip}{3.5ex \@plus 1ex \@minus .2ex}
+\newcommand{\pagex}{%
+  \ifx\mytoken\begin\pagey\else\pagez\fi}%
+\newcommand{\pagey}{%
+  \if@nobreak\else
+    \vspace{\partopsep}%
+    \vspace{\topsep}%
+  \fi
+  \marginnote{\mypage}\nobreak
+  \@afterindentfalse\@afterheading}%
+\newcommand{\pagez}{%
   \ifvmode
     \if@nobreak
-      \marginnote{#1}%
+      \marginnote{\mypage}\nobreak
       \@afterindentfalse\@afterheading
     \else
-      \ifdim\lastskip=\z@
-        \marginnote{#1}\nobreak
-      \else
-        \marginnote{#1}%
-      \fi
+      \ifthenelse{\equal{verse}{\@currenvir}}
+        {\marginnote{\mypage}[6.4pt]}%
+        {\marginnote{\mypage}}%
+      \nobreak
     \fi
   \else
     \unskip
     \cleaders\copy\brkbox\hskip\wd\brkbox
-    \marginnote{#1}\ignorespaces
+    \marginnote{\mypage}\ignorespaces
   \fi}%
 \newsavebox{\brkbox}%
 \sbox{\brkbox}{$\,|\,$}%
