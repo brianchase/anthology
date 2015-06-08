@@ -44,6 +44,7 @@ current:
 1. Seneca – De Ira [On Anger], bk. 2.6–2.10
 1. Aulus Gellius – Attic Nights, bk. 5.10
 1. Augustine of Hippo – On Christian Doctrine, bk 2.31–2.34
+1. Boethius – The Consolation of Philosophy, bk. 5
 1. Anselm of Canterbury – Proslogium, chaps. 2–4
 1. Thomas Aquinas – Five Ways
 1. Francesco Petrarca (Petrarch) – The Ascent of Mont Ventoux
