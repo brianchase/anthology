@@ -39,7 +39,7 @@ current:
 1. Plato – Euthyphro
 1. Plato – Glaucon on the Ring of Gyges
 1. Plato – Socrates' Allegory of the Cave
-1. Aristotle – Nicomachean Ethics, bk. 1, chaps. 1–7
+1. Aristotle – Nicomachean Ethics, bk. 1
 1. Epicurus – Letter to Menoeceus
 1. Seneca – De Ira [On Anger], bk. 2.6–2.10
 1. Aulus Gellius – Attic Nights, bk. 5.10
