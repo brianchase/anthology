@@ -1,4 +1,4 @@
-% Last modified: Sun 07 Jun 2015 01:25:39 PM EDT
+% Last modified: Wed 10 Jun 2015 01:32:45 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -248,38 +248,28 @@
 %%  Headings  %%
 %%%%%%%%%%%%%%%%
 
-\renewcommand{\@makechapterhead}[1]{{%
+\renewcommand{\@makechapterhead}[1]{%
   \thispagestyle{empty}
   \begin{center}
     {\addfontfeature{Numbers=Lining}\huge\thechapter}%
     \par\nobreak
     \vspace*{10pt}%
-    {\LARGE\itshape #1\par\@addon\par\normalfont\large\@textdate}%
+    \LARGE\itshape #1\par\@addon\par\normalfont\large\@textdate
     \vskip 1.6em
-    {\large\@author\par\normalfont\normalsize\@authdate}%
+    \large\@author\par\normalfont\normalsize\@authdate
     \gdef\@textdate{}%
     \gdef\@author{}%
     \gdef\@authdate{}%
     \gdef\@addon{}%
   \end{center}
-  \vskip 34pt
-  \parindent 0pt}}%
+  \vskip 34pt}%
 \setcounter{secnumdepth}{5} % Allow numbered paragraphs
-\renewcommand{\@schapter}[1]{%
-  \chaptermark{#1}% only difference from default
-  \if@twocolumn
-    \@topnewpage[\@makeschapterhead{#1}]%
-  \else
-    \@makeschapterhead{#1}%
-    \@afterheading
-  \fi}%
-\renewcommand{\@makeschapterhead}[1]{{%
+\renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
     \LARGE\itshape #1\nobreak
   \end{center}
-  \vskip 34pt
-  \parindent 0pt}}%
+  \vskip 34pt}%
 \renewcommand{\thesubsubsection}{%
   \normalfont\normalsize\thesubsection.\@arabic\c@subsubsection}%
 \renewcommand{\section}{\@startsection{section}{1}{\z@}%
