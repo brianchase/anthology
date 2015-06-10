@@ -1,4 +1,4 @@
-% Last modified: Wed 10 Jun 2015 01:32:45 PM EDT
+% Last modified: Wed 10 Jun 2015 03:34:10 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -248,7 +248,7 @@
 %%  Headings  %%
 %%%%%%%%%%%%%%%%
 
-\renewcommand{\@makechapterhead}[1]{%
+\renewcommand{\@makechapterhead}[1]{{%
   \thispagestyle{empty}
   \begin{center}
     {\addfontfeature{Numbers=Lining}\huge\thechapter}%
@@ -262,7 +262,8 @@
     \gdef\@authdate{}%
     \gdef\@addon{}%
   \end{center}
-  \vskip 34pt}%
+  \vskip 34pt
+  \parindent 0pt}}
 \setcounter{secnumdepth}{5} % Allow numbered paragraphs
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
