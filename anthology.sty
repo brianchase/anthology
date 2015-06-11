@@ -1,4 +1,4 @@
-% Last modified: Wed 10 Jun 2015 03:34:10 PM EDT
+% Last modified: Thu 11 Jun 2015 01:01:08 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -12,6 +12,7 @@
 %%  Package Options  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
+\newif\if@brackets
 \newif\if@ebook
 \newif\if@elptfont
 \newif\if@letterpaper
@@ -20,6 +21,7 @@
 \DeclareOption{10pt}{\@teptfonttrue}
 \DeclareOption{11pt}{\@elptfonttrue}
 \DeclareOption{12pt}{\@twptfonttrue}
+\DeclareOption{brackets}{\@bracketstrue}
 \DeclareOption{a4paper}{\@letterpapertrue\@ebookfalse}
 \DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{collsonly}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
@@ -27,48 +29,49 @@
 \DeclareOption{firstshort}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{letterpaper}{\@letterpapertrue\@ebookfalse}
 \DeclareOption{reflist}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\DeclareOption{twocolumn}{\@bracketstrue}
 \ProcessOptions
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Basic Formatting  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\frenchspacing                % French spacing after punctuation
-\setlength{\parindent}{1.1em} % Indent paragraphs by this value
-\widowpenalty=1500            % Reduce but don't prohibit widows
-\clubpenalty=1000             % Reduce but don't prohibit orphans
-\if@twocolumn % Vertical justification if '@twocolumntrue'
-  \usepackage{fixltx2e}% Address other issues with two columns
+\frenchspacing
+\setlength{\parindent}{1.1em}
+\widowpenalty=1500
+\clubpenalty=1000
+\if@twocolumn
   \flushbottom
+  \usepackage{fixltx2e}
+  \setlength{\columnsep}{18pt}
+  \sloppy
 \else
   \raggedbottom
+  \if@teptfont\sloppy\fi % Use '\sloppy' with option 10pt
+  \if@twptfont\sloppy\fi % Use '\sloppy' with option 12pt
+  \if@ebook\sloppy\fi    % Use '\sloppy' with option ebook
 \fi
-
-% Use '\sloppy' with options ebook, 10pt, and 12pt:
-\if@ebook\sloppy\else\if@elptfont\else\sloppy\fi\fi
 
 % Change 'cleardoublepage' to allow blank pages:
 \renewcommand{\cleardoublepage}{%
   \clearpage\thispagestyle{empty}\if@twoside \ifodd\c@page\else
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}%
 
-% Basic layout for ebooks: Among other things, horizontally center the
-% text body. Vertically center the area from the top of the header to
-% the bottom of the text body.
+% Basic layout for ebooks:
 \if@ebook
-  \setlength\paperheight{8.5in}
-  \setlength\paperwidth{5.5in}
-  \setlength\evensidemargin{-30pt}
-  \setlength\headheight{14pt}
-  \setlength\headsep{8pt}
-  \setlength\marginparsep{8pt}
-  \setlength\marginparwidth{30pt}
-  \setlength\oddsidemargin{-30pt}
-  \setlength\textheight{38\baselineskip}
-  \setlength\textwidth{312pt}
-  \if@teptfont\setlength\topmargin{-4pt}\fi  % font-specific
-  \if@elptfont\setlength\topmargin{-34pt}\fi % font-specific
-  \if@twptfont\setlength\topmargin{-52pt}\fi % font-specific
+  \setlength{\paperheight}{8.5in}
+  \setlength{\paperwidth}{5.5in}
+  \setlength{\evensidemargin}{-30pt}
+%  \setlength{\headheight}{14pt}% Important but set further below
+  \setlength{\headsep}{8pt}
+  \setlength{\marginparsep}{8pt}
+  \setlength{\marginparwidth}{30pt}
+  \setlength{\oddsidemargin}{-30pt}
+  \setlength{\textheight}{38\baselineskip}
+  \setlength{\textwidth}{312pt}
+  \if@teptfont\setlength{\topmargin}{-4pt}\fi  % Font-specific
+  \if@elptfont\setlength{\topmargin}{-34pt}\fi % Font-specific
+  \if@twptfont\setlength{\topmargin}{-52pt}\fi % Font-specific
 \fi
 
 %%%%%%%%%%%%%
@@ -132,13 +135,22 @@
   \chapter*{References}
   \addcontentsline{toc}{schapter}{References}
   \markright{References}}%
-\usepackage{marginnote}
-\renewcommand{\marginfont}{\normalfont\small}%
+\if@brackets\else
+  \usepackage{marginnote}
+  \renewcommand{\marginfont}{\normalfont\small}%
+\fi
 
 %%%%%%%%%%%%%%%%%%
 %%  Title Page  %%
 %%%%%%%%%%%%%%%%%%
 
+\renewenvironment{titlepage}
+  {\cleardoublepage
+   \thispagestyle{empty}%
+   \setcounter{page}\@ne}%
+  {\if@twoside\else
+     \setcounter{page}\@ne
+   \fi}%
 \renewcommand{\maketitle}{%
   \begin{titlepage}
     \leavevmode\vfil
@@ -146,7 +158,7 @@
       {\Huge\itshape\@title}%
     \end{center}
     \vfil\vfil\leavevmode
-    \clearpage
+    \if@twocolumn\newpage\else\clearpage\fi
   \end{titlepage}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,16 +167,10 @@
 
 \setcounter{tocdepth}{0}
 \renewcommand{\tableofcontents}{%
-  \cleardoublepage
-  \if@twocolumn
-    \@restonecoltrue\onecolumn
-  \else
-    \@restonecolfalse
-  \fi
+  \if@twocolumn\clearpage\else\cleardoublepage\fi
   \chapter*{\contentsname
     \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
-  \@starttoc{toc}%
-  \if@restonecol\twocolumn\fi}%
+  \@starttoc{toc}}%
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -215,12 +221,11 @@
   \chaptermark{#1}%
   \addtocontents{lof}{\protect\addvspace{10\p@}}%
   \addtocontents{lot}{\protect\addvspace{10\p@}}%
-  \if@twocolumn
-    \@topnewpage[\@makechapterhead{#2}]%
-  \else
     \@makechapterhead{#2}%
-    \@afterheading
-  \fi}%
+    \@afterheading}%
+\def\@schapter#1{%
+  \@makeschapterhead{#1}%
+  \@afterheading}%
 \renewcommand{\backmatter}{%
   \if@openright
     \cleardoublepage
@@ -236,11 +241,19 @@
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{\textit{#1}}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\textit{#1}}{}}%
 \fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[CO]{\leftmark}
-\fancyhead[CE]{\itshape\@title}
+\if@twocolumn
+  \setlength{\headheight}{24pt}
+  \lhead{\parbox{\columnwidth}{\centering\itshape\@title}}%
+  \rhead{\parbox{\columnwidth}{\centering\leftmark}}%
+  \fancyfoot[C]{\thepage}%
+\else
+  \setlength{\headheight}{14pt}
+  \fancyhead[LE,RO]{\thepage}
+  \fancyhead[CO]{\leftmark}
+  \fancyhead[CE]{\itshape\@title}
+\fi
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -263,8 +276,8 @@
     \gdef\@addon{}%
   \end{center}
   \vskip 34pt
-  \parindent 0pt}}
-\setcounter{secnumdepth}{5} % Allow numbered paragraphs
+  \parindent 0pt}}%
+\setcounter{secnumdepth}{5}
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
@@ -298,57 +311,61 @@
 %%  Original Source Page Breaks  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\if@brackets
+  \newcommand{\page}[1]{$\,$[#1]$\,$}%
+\else
 % The command below is from marginnote.sty. Adding '\nobreak' prevents
 % a page break between '\marginnote' and the text that follows it.
-\renewcommand{\mn@vlap}[1]{%
-  \setbox\@tempboxa\vbox to \ht\strutbox{#1\vss}%
-  \box\@tempboxa\nobreak\vskip-\baselineskip}%
-\newcommand{\page}[1]{%
-  \renewcommand{\mypage}{#1}%
-  \futurelet\mytoken\pageparse}%
-\newcommand{\mypage}{}%
-\newcommand{\pageparse}{%
-  \ifx\mytoken\section\pagew\else\pagex\fi}%
-\newcommand{\pagew}{%
-  \if@nobreak
-    \marginnote{\mypage}%
-  \else
-    \vspace{\sectionskip}%
-    \marginnote{\mypage}\nobreak
-  \fi
-  \@afterindentfalse\@afterheading}%
-\newlength{\sectionskip}%
-\setlength{\sectionskip}{3.5ex \@plus 1ex \@minus .2ex}
-\newcommand{\pagex}{%
-  \ifx\mytoken\begin\pagey\else\pagez\fi}%
-\newcommand{\pagey}{%
-  \if@nobreak\else
-    \vspace{\partopsep}%
-    \vspace{\topsep}%
-  \fi
-  \marginnote{\mypage}\nobreak
-  \@afterindentfalse\@afterheading}%
-\newcommand{\pagez}{%
-  \ifvmode
+  \renewcommand{\mn@vlap}[1]{%
+    \setbox\@tempboxa\vbox to \ht\strutbox{#1\vss}%
+    \box\@tempboxa\nobreak\vskip-\baselineskip}%
+  \newcommand{\page}[1]{%
+    \renewcommand{\mypage}{#1}%
+    \futurelet\mytoken\pageparse}%
+  \newcommand{\mypage}{}%
+  \newcommand{\pageparse}{%
+    \ifx\mytoken\section\pagew\else\pagex\fi}%
+  \newcommand{\pagew}{%
     \if@nobreak
-      \marginnote{\mypage}\nobreak
-      \@afterindentfalse\@afterheading
+      \marginnote{\mypage}%
     \else
-      \ifthenelse{\equal{verse}{\@currenvir}}
-        {\marginnote{\mypage}[\verseadj]}%
-        {\marginnote{\mypage}}%
-      \nobreak
+      \vspace{\sectionskip}%
+      \marginnote{\mypage}\nobreak
     \fi
-  \else
-    \unskip
-    \cleaders\copy\brkbox\hskip\wd\brkbox
-    \marginnote{\mypage}\ignorespaces
-  \fi}%
-\newlength{\verseadj}%
-\setlength{\verseadj}{% font-specific and assumes OldStyle
-  \if@teptfont 6.2pt\fi\if@elptfont 6.4pt\fi\if@twptfont 7pt\fi}%
-\newsavebox{\brkbox}%
-\sbox{\brkbox}{$\,|\,$}%
+    \@afterindentfalse\@afterheading}%
+  \newlength{\sectionskip}%
+  \setlength{\sectionskip}{3.5ex \@plus 1ex \@minus .2ex}
+  \newcommand{\pagex}{%
+    \ifx\mytoken\begin\pagey\else\pagez\fi}%
+  \newcommand{\pagey}{%
+    \if@nobreak\else
+      \vspace{\partopsep}%
+      \vspace{\topsep}%
+    \fi
+    \marginnote{\mypage}\nobreak
+    \@afterindentfalse\@afterheading}%
+  \newcommand{\pagez}{%
+    \ifvmode
+      \if@nobreak
+        \marginnote{\mypage}\nobreak
+        \@afterindentfalse\@afterheading
+      \else
+        \ifthenelse{\equal{verse}{\@currenvir}}
+          {\marginnote{\mypage}[\verseadj]}%
+          {\marginnote{\mypage}}%
+        \nobreak
+      \fi
+    \else
+      \unskip
+      \cleaders\copy\brkbox\hskip\wd\brkbox
+      \marginnote{\mypage}\ignorespaces
+    \fi}%
+  \newlength{\verseadj}%
+  \setlength{\verseadj}{% Font-specific; assumes OldStyle
+    \if@teptfont 6.2pt\fi\if@elptfont 6.4pt\fi\if@twptfont 7pt\fi}%
+  \newsavebox{\brkbox}%
+  \sbox{\brkbox}{$\,|\,$}%
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fields and Links  %%
@@ -378,7 +395,11 @@
 
 \usepackage{enumitem}% For lists
 \usepackage{graphicx}% For images
-\usepackage{multicol}% For multi-column text
+\if@twocolumn
+  \newenvironment{multicols}[1]{}{}% Disable multicols
+\else
+  \usepackage{multicol}% For multi-column text
+\fi
 \usepackage{wrapfig}% For inset text and figures
 \usepackage{verse}% Handy for longer poems
 
@@ -408,7 +429,7 @@
 \renewcommand{\poemtitlefont}{\scshape\centering}%
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
-\hyphenation{mor-als Hough-ton Wil-liam}% for citations
+\hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
 
 % Pass 'width=\maxwidth' to includegraphics:
 \newcommand{\maxwidth}{%
