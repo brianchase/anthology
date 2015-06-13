@@ -1,4 +1,4 @@
-% Last modified: Thu 11 Jun 2015 01:01:08 PM EDT
+% Last modified: Sat 13 Jun 2015 12:14:08 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -51,11 +51,6 @@
   \if@twptfont\sloppy\fi % Use '\sloppy' with option 12pt
   \if@ebook\sloppy\fi    % Use '\sloppy' with option ebook
 \fi
-
-% Change 'cleardoublepage' to allow blank pages:
-\renewcommand{\cleardoublepage}{%
-  \clearpage\thispagestyle{empty}\if@twoside \ifodd\c@page\else
-  \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}%
 
 % Basic layout for ebooks:
 \if@ebook
@@ -277,35 +272,30 @@
   \end{center}
   \vskip 34pt
   \parindent 0pt}}%
-\setcounter{secnumdepth}{5}
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
     \LARGE\itshape #1\nobreak
   \end{center}
   \vskip 34pt}%
-\renewcommand{\thesubsubsection}{%
-  \normalfont\normalsize\thesubsection.\@arabic\c@subsubsection}%
-\renewcommand{\section}{\@startsection{section}{1}{\z@}%
-  {-3.5ex \@plus -1ex \@minus -.2ex}%
-  {2.3ex \@plus.2ex}%
-  {\centering\normalfont\bfseries}}%
-\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
-  {-3.5ex\@plus -1ex \@minus -.2ex}%
-  {1.5ex \@plus .2ex}%
-  {\centering\normalfont\itshape}}%
-\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
-  {-3.5ex\@plus -1ex \@minus -.2ex}%
-  {1.5ex \@plus .2ex}%
-  {\centering\normalfont\itshape}}%
-\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
-  {3.5ex \@plus1ex \@minus.2ex}%
-  {-0.5em}%
-  {\normalfont\small\MakeUppercase}}%
-\renewcommand{\subparagraph}{\@startsection{subparagraph}{5}{\parindent}%
-  {3.5ex \@plus1ex \@minus .2ex}%
-  {-0.5em}%
-  {\normalfont\normalsize\itshape}}%
+\usepackage[clearempty]{titlesec}
+\setcounter{secnumdepth}{0}
+\titleformat{\section}
+  {\normalfont\bfseries\filcenter}{\thesection.}{2ex}{}
+\titleformat{\subsection}
+  {\normalfont\itshape\filcenter}{\thesubsection.}{2ex}{}
+\titleformat{\subsubsection}
+  {\normalfont\itshape\filcenter}{\thesubsubsection.}{2ex}{}
+\titleformat{\paragraph}[runin]
+  {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{}
+\titleformat{\subparagraph}[runin]
+  {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{}
+\titlespacing*{\section}
+  {3ex}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}[3ex]
+\titlespacing*{\subsection}
+  {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
+\titlespacing*{\subsubsection}
+  {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Original Source Page Breaks  %%
@@ -423,13 +413,33 @@
 \AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
 
 \setlist{noitemsep}
-\newcommand{\addcolon}[1]{#1:}%
 \setlist[description]{font=\bfseries,format=\addcolon}
-\setlength{\beforepoemtitleskip}{0em}
+\newcommand{\addcolon}[1]{#1:}%
+\setlength{\beforepoemtitleskip}{0pt}
 \renewcommand{\poemtitlefont}{\scshape\centering}%
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
 \hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
+
+% For the Declaration of Independence:
+\newenvironment{decliststates}
+  {\if@ebook
+     \begin{multicols}{2}\raggedright
+     \begin{itemize}[itemsep=8pt,label=,labelsep=*]\small
+   \else
+     \begin{multicols}{3}\raggedright
+     \begin{itemize}[wide,itemsep=8pt,label=,labelsep=*]\small
+   \fi}%
+  {\end{itemize}
+   \end{multicols}}%
+\newenvironment{declistnames}
+  {\if@ebook
+     \begin{itemize}[label=,labelsep=*,leftmargin=0em,
+                       itemsep=0pt,topsep=0pt]
+   \else
+     \begin{itemize}[wide,label=,itemsep=0pt,topsep=0pt]
+   \fi}%
+  {\end{itemize}}%
 
 % Pass 'width=\maxwidth' to includegraphics:
 \newcommand{\maxwidth}{%
