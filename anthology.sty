@@ -1,4 +1,4 @@
-% Last modified: Sun 14 Jun 2015 06:50:39 AM EDT
+% Last modified: Sun 14 Jun 2015 07:41:37 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -395,15 +395,18 @@
 
 \renewcommand{\@makefnmark}{%
   \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
-\newcommand{\BCE}{\textsmaller{BCE}}%
-\newcommand{\CE}{\textsmaller{CE}}%
-\newcommand{\llb}{\if@elptfont\if@letterpaper\linebreak[4]\fi\fi}%
-\newcommand{\wrapadj}{\raggedright\hspace{1em}}
 \newenvironment{abstract}[1][]
   {\begin{center}\textsc{#1}\end{center}\small}%
   {}%
-\newcommand{\attrib}[1]{%
-  \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
+\newcommand{\BCE}{\textsmaller{BCE}}%
+\newcommand{\CE}{\textsmaller{CE}}%
+\hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
+\newcommand{\llb}{\if@elptfont\if@letterpaper\linebreak[4]\fi\fi}%
+\newcommand{\snip}{%
+  \vskip 1ex{\centering
+  \textasteriskcentered~\textasteriskcentered~\textasteriskcentered
+  \par}\vskip 1ex}%
+\newcommand{\wrapadj}{\raggedright\hspace{1em}}
 
 \AtBeginEnvironment{description}{\small}
 \AtBeginEnvironment{quotation}{\small}
@@ -415,12 +418,14 @@
 \setlist{noitemsep}
 \setlist[description]{font=\bfseries,format=\addcolon}
 \newcommand{\addcolon}[1]{#1:}%
+
+\newcommand{\attrib}[1]{%
+  \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
 \setlength{\beforepoemtitleskip}{0pt}
 \renewcommand{\poemtitlefont}{\scshape\centering}%
+\newcommand{\poke}[1]{\makebox[0pt][r]{#1}}%
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
-\newcommand{\poke}[1]{\makebox[0pt][r]{#1}}%
-\hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
 
 % For the Declaration of Independence:
 \newenvironment{decliststates}
