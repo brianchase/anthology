@@ -1,4 +1,4 @@
-% Last modified: Sun 14 Jun 2015 07:41:37 PM EDT
+% Last modified: Mon 15 Jun 2015 01:57:11 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -256,46 +256,43 @@
 %%  Headings  %%
 %%%%%%%%%%%%%%%%
 
-\renewcommand{\@makechapterhead}[1]{{%
-  \thispagestyle{empty}
-  \begin{center}
-    {\addfontfeature{Numbers=Lining}\huge\thechapter}%
-    \par\nobreak
-    \vspace*{10pt}%
-    \LARGE\itshape #1\par\@addon\par\normalfont\large\@textdate
-    \vskip 1.6em
-    \large\@author\par\normalfont\normalsize\@authdate
-    \gdef\@textdate{}%
-    \gdef\@author{}%
-    \gdef\@authdate{}%
-    \gdef\@addon{}%
-  \end{center}
-  \vskip 34pt
-  \parindent 0pt}}%
-\renewcommand{\@makeschapterhead}[1]{%
-  \thispagestyle{empty}%
-  \begin{center}
-    \LARGE\itshape #1\nobreak
-  \end{center}
-  \vskip 34pt}%
-\usepackage[clearempty]{titlesec}
+\usepackage[clearempty,explicit]{titlesec}
 \setcounter{secnumdepth}{0}
+\titleformat{\chapter}[display]
+  {\thispagestyle{empty}
+   \huge\filcenter}{\lnn{\thechapter}}{0ex}
+  {\LARGE\itshape\vbox to 3.8em{%
+     #1\vskip 0.2ex
+     \@addon\normalfont\normalsize\@textdate\vfill}}
+  [\normalfont\large\@author\vskip 0.2ex
+   \normalsize\@authdate
+   \gdef\@textdate{}%
+   \gdef\@author{}%
+   \gdef\@authdate{}%
+   \gdef\@addon{}]
 \titleformat{\section}
-  {\normalfont\bfseries\filcenter}{\thesection.}{2ex}{}
+  {\normalfont\bfseries\filcenter}{\thesection.}{2ex}{#1}
 \titleformat{\subsection}
-  {\normalfont\itshape\filcenter}{\thesubsection.}{2ex}{}
+  {\normalfont\itshape\filcenter}{\thesubsection.}{2ex}{#1}
 \titleformat{\subsubsection}
-  {\normalfont\itshape\filcenter}{\thesubsubsection.}{2ex}{}
+  {\normalfont\itshape\filcenter}{\thesubsubsection.}{2ex}{#1}
 \titleformat{\paragraph}[runin]
-  {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{}
+  {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{#1}
 \titleformat{\subparagraph}[runin]
-  {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{}
+  {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{#1}
+\titlespacing*{\chapter}{3ex}{-\topskip}{4.2em}[3ex]
 \titlespacing*{\section}
   {3ex}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}[3ex]
 \titlespacing*{\subsection}
   {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
 \titlespacing*{\subsubsection}
   {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
+\renewcommand{\@makeschapterhead}[1]{%
+  \thispagestyle{empty}%
+  \begin{center}
+    \LARGE\itshape #1
+  \end{center}
+  \vskip 3em}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Original Source Page Breaks  %%
@@ -368,8 +365,10 @@
 \gdef\@authdate{}%
 \gdef\@textdate{}%
 \gdef\@version{}%
-\newcommand{\addon}{\@ifnextchar[{\xaddon}{\xaddon[]}}%
-\def\xaddon[#1]#2{\gdef\@addon{\Large#2\par\large#1}}%
+
+\newcommand{\addon}{\@ifnextchar[{\addonx}{\addony}}%
+\def\addonx[#1]#2{\gdef\@addon{\large#2\\[0.2ex]#1\\[0.2ex]}}%
+\def\addony#1{\gdef\@addon{\large#1\\[0.2ex]}}%
 \gdef\@addon{}%
 \renewcommand{\title}[1]{%
   \gdef\@title{#1}%
