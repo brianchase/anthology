@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Jun 2015 01:57:11 PM EDT
+% Last modified: Tue 16 Jun 2015 09:37:15 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -38,8 +38,8 @@
 
 \frenchspacing
 \setlength{\parindent}{1.1em}
-\widowpenalty=1500
 \clubpenalty=1000
+\widowpenalty=10000
 \if@twocolumn
   \flushbottom
   \usepackage{fixltx2e}
@@ -52,12 +52,11 @@
   \if@ebook\sloppy\fi    % Use '\sloppy' with option ebook
 \fi
 
-% Basic layout for ebooks:
-\if@ebook
+\if@ebook % Basic layout for ebooks:
   \setlength{\paperheight}{8.5in}
   \setlength{\paperwidth}{5.5in}
   \setlength{\evensidemargin}{-30pt}
-%  \setlength{\headheight}{14pt}% Important but set further below
+%  \setlength{\headheight}{14pt}% Important but set below
   \setlength{\headsep}{8pt}
   \setlength{\marginparsep}{8pt}
   \setlength{\marginparwidth}{30pt}
@@ -261,8 +260,8 @@
 \titleformat{\chapter}[display]
   {\thispagestyle{empty}
    \huge\filcenter}{\lnn{\thechapter}}{0ex}
-  {\LARGE\itshape\vbox to 3.8em{%
-     #1\vskip 0.2ex
+  {\vbox to 3.8em{%
+     \LARGE\itshape #1\vskip 0.2ex
      \@addon\normalfont\normalsize\@textdate\vfill}}
   [\normalfont\large\@author\vskip 0.2ex
    \normalsize\@authdate
@@ -282,7 +281,7 @@
   {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{#1}
 \titlespacing*{\chapter}{3ex}{-\topskip}{4.2em}[3ex]
 \titlespacing*{\section}
-  {3ex}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}[3ex]
+  {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
 \titlespacing*{\subsection}
   {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
 \titlespacing*{\subsubsection}
@@ -321,7 +320,7 @@
     \fi
     \@afterindentfalse\@afterheading}%
   \newlength{\sectionskip}%
-  \setlength{\sectionskip}{3.5ex \@plus 1ex \@minus .2ex}
+  \setlength{\sectionskip}{3.25ex \@plus 1ex \@minus .2ex}
   \newcommand{\pagex}{%
     \ifx\mytoken\begin\pagey\else\pagez\fi}%
   \newcommand{\pagey}{%
