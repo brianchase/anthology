@@ -1,4 +1,4 @@
-% Last modified: Tue 16 Jun 2015 09:37:15 AM EDT
+% Last modified: Wed 17 Jun 2015 01:03:47 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -90,7 +90,6 @@
 \let\lnn\liningnums
 \usepackage[greek,american]{babel}
 \newcommand{\grk}[1]{{\greekfont\foreignlanguage{greek}{#1}}}
-\usepackage{relsize}
 
 %%%%%%%%%%%%%
 %%  Notes  %%
@@ -260,7 +259,7 @@
 \titleformat{\chapter}[display]
   {\thispagestyle{empty}
    \huge\filcenter}{\lnn{\thechapter}}{0ex}
-  {\vbox to 3.8em{%
+  {\vbox to 8.4ex{%
      \LARGE\itshape #1\vskip 0.2ex
      \@addon\normalfont\normalsize\@textdate\vfill}}
   [\normalfont\large\@author\vskip 0.2ex
@@ -396,8 +395,8 @@
 \newenvironment{abstract}[1][]
   {\begin{center}\textsc{#1}\end{center}\small}%
   {}%
-\newcommand{\BCE}{\textsmaller{BCE}}%
-\newcommand{\CE}{\textsmaller{CE}}%
+\newcommand{\BCE}{\small{BCE}}%
+\newcommand{\CE}{\small{CE}}%
 \hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
 \newcommand{\llb}{\if@elptfont\if@letterpaper\linebreak[4]\fi\fi}%
 \newcommand{\snip}{%
