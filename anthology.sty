@@ -1,4 +1,4 @@
-% Last modified: Thu 18 Jun 2015 11:04:10 AM EDT
+% Last modified: Thu 18 Jun 2015 01:47:02 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -414,6 +414,27 @@
   \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
 \newcommand{\poke}[1]{\makebox[0pt][r]{#1}}%
 
+% For abstracts and the like:
+\newenvironment{abstract}[2][]
+  {\ifblank{#1}{}{\section*{#1}}%
+   \ifthenelse{\equal{#2}{c}\OR
+                 \equal{#2}{h}}
+     {\ifstrequal{#2}{c}{\@abcent}{}%
+      \ifstrequal{#2}{h}{\@abhang}{}}%
+    {\ifblank{#2}{\@abnone}{\@abnone #2}}}
+  {\endlist}%
+\newcommand{\@abcent}{%
+  \trivlist\small\itshape\centering\item\relax}%
+\newcommand{\@abhang}{%
+  \list{}{%
+    \small\itshape
+    \leftmargin=\parindent
+    \parsep=\parskip
+    \listparindent=\parindent
+    \itemindent=-\parindent}%
+  \item\relax}%
+\newcommand{\@abnone}{\trivlist\small\itshape\item\relax}%
+
 % For the Declaration of Independence:
 \newenvironment{decliststates}
   {\if@ebook
@@ -434,9 +455,6 @@
    \fi}%
   {\end{itemize}}%
 
-\newenvironment{abstract}[1][]
-  {\begin{center}\textsc{#1}\end{center}\small}%
-  {}%
 \newcommand{\BCE}{\small{BCE}}%
 \newcommand{\CE}{\small{CE}}%
 \hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
