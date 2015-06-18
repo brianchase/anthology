@@ -1,4 +1,4 @@
-% Last modified: Thu 18 Jun 2015 10:49:20 AM EDT
+% Last modified: Thu 18 Jun 2015 11:04:10 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -103,6 +103,8 @@
 \renewcommand{\@makefntext}[1]{%
   \parindent 1em%
   \normalfont\@thefnmark.\hspace{0.4em}#1}%
+\renewcommand{\@makefnmark}{%
+  \hbox{\@textsuperscript{\lnn{\@thefnmark}}}}
 \newcommand{\source}{%
   \@ifstar
     {\@ifnextchar[{\@xfootnote}{\@xfootnote[]}}%
@@ -364,7 +366,6 @@
 \gdef\@authdate{}%
 \gdef\@textdate{}%
 \gdef\@version{}%
-
 \newcommand{\addon}{\@ifnextchar[{\@xaddon}{\@yaddon}}%
 \def\@xaddon[#1]#2{\gdef\@addon{\large#2\\[0.2ex]#1\\[0.2ex]}}%
 \def\@yaddon#1{\gdef\@addon{\large#1\\[0.2ex]}}%
@@ -433,8 +434,6 @@
    \fi}%
   {\end{itemize}}%
 
-\renewcommand{\@makefnmark}{%
-  \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
 \newenvironment{abstract}[1][]
   {\begin{center}\textsc{#1}\end{center}\small}%
   {}%
