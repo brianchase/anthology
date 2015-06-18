@@ -1,4 +1,4 @@
-% Last modified: Wed 17 Jun 2015 01:03:47 PM EDT
+% Last modified: Thu 18 Jun 2015 10:28:43 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -104,13 +104,13 @@
   \normalfont\@thefnmark.\hspace{0.4em}#1}%
 \newcommand{\source}{%
   \@ifstar
-    {\@ifnextchar[{\xfootnote}{\xfootnote[]}}%
-    {\@ifnextchar[{\yfootnote}{\yfootnote[]}}}
-\def\xfootnote[#1]#2{%
-  \nfootnote{Republished~from~\fullcite*[#1]{#2}}}
-\def\yfootnote[#1]#2{%
-  \nfootnote{Republished~from~\fullcite[#1]{#2}}}
-\long\def\nfootnote#1{%
+    {\@ifnextchar[{\@xfootnote}{\@xfootnote[]}}%
+    {\@ifnextchar[{\@yfootnote}{\@yfootnote[]}}}
+\def\@xfootnote[#1]#2{%
+  \@zfootnote{Republished~from~\fullcite*[#1]{#2}}}
+\def\@yfootnote[#1]#2{%
+  \@zfootnote{Republished~from~\fullcite[#1]{#2}}}
+\long\def\@zfootnote#1{%
   \insert\footins{\normalfont\footnotesize
   \interlinepenalty\interfootnotelinepenalty
   \splittopskip\footnotesep
@@ -305,45 +305,45 @@
     \setbox\@tempboxa\vbox to \ht\strutbox{#1\vss}%
     \box\@tempboxa\nobreak\vskip-\baselineskip}%
   \newcommand{\page}[1]{%
-    \renewcommand{\mypage}{#1}%
-    \futurelet\mytoken\pageparse}%
-  \newcommand{\mypage}{}%
-  \newcommand{\pageparse}{%
-    \ifx\mytoken\section\pagew\else\pagex\fi}%
-  \newcommand{\pagew}{%
+    \renewcommand{\@mypage}{#1}%
+    \futurelet\@mytoken\@pageparse}%
+  \newcommand{\@mypage}{}%
+  \newcommand{\@pageparse}{%
+    \ifx\@mytoken\section\@wpage\else\@xpage\fi}%
+  \newcommand{\@wpage}{%
     \if@nobreak
-      \marginnote{\mypage}%
+      \marginnote{\@mypage}%
     \else
       \vspace{\sectionskip}%
-      \marginnote{\mypage}\nobreak
+      \marginnote{\@mypage}\nobreak
     \fi
     \@afterindentfalse\@afterheading}%
   \newlength{\sectionskip}%
   \setlength{\sectionskip}{3.25ex \@plus 1ex \@minus .2ex}
-  \newcommand{\pagex}{%
-    \ifx\mytoken\begin\pagey\else\pagez\fi}%
-  \newcommand{\pagey}{%
+  \newcommand{\@xpage}{%
+    \ifx\@mytoken\begin\@ypage\else\@zpage\fi}%
+  \newcommand{\@ypage}{%
     \if@nobreak\else
       \vspace{\partopsep}%
       \vspace{\topsep}%
     \fi
-    \marginnote{\mypage}\nobreak
+    \marginnote{\@mypage}\nobreak
     \@afterindentfalse\@afterheading}%
-  \newcommand{\pagez}{%
+  \newcommand{\@zpage}{%
     \ifvmode
       \if@nobreak
-        \marginnote{\mypage}\nobreak
+        \marginnote{\@mypage}\nobreak
         \@afterindentfalse\@afterheading
       \else
         \ifthenelse{\equal{verse}{\@currenvir}}
-          {\marginnote{\mypage}[\verseadj]}%
-          {\marginnote{\mypage}}%
+          {\marginnote{\@mypage}[\verseadj]}%
+          {\marginnote{\@mypage}}%
         \nobreak
       \fi
     \else
       \unskip
       \cleaders\copy\brkbox\hskip\wd\brkbox
-      \marginnote{\mypage}\ignorespaces
+      \marginnote{\@mypage}\ignorespaces
     \fi}%
   \newlength{\verseadj}%
   \setlength{\verseadj}{% Font-specific; assumes OldStyle
@@ -364,9 +364,9 @@
 \gdef\@textdate{}%
 \gdef\@version{}%
 
-\newcommand{\addon}{\@ifnextchar[{\addonx}{\addony}}%
-\def\addonx[#1]#2{\gdef\@addon{\large#2\\[0.2ex]#1\\[0.2ex]}}%
-\def\addony#1{\gdef\@addon{\large#1\\[0.2ex]}}%
+\newcommand{\addon}{\@ifnextchar[{\@xaddon}{\@yaddon}}%
+\def\@xaddon[#1]#2{\gdef\@addon{\large#2\\[0.2ex]#1\\[0.2ex]}}%
+\def\@yaddon#1{\gdef\@addon{\large#1\\[0.2ex]}}%
 \gdef\@addon{}%
 \renewcommand{\title}[1]{%
   \gdef\@title{#1}%
@@ -390,21 +390,6 @@
 \usepackage{wrapfig}% For inset text and figures
 \usepackage{verse}% Handy for longer poems
 
-\renewcommand{\@makefnmark}{%
-  \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
-\newenvironment{abstract}[1][]
-  {\begin{center}\textsc{#1}\end{center}\small}%
-  {}%
-\newcommand{\BCE}{\small{BCE}}%
-\newcommand{\CE}{\small{CE}}%
-\hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
-\newcommand{\llb}{\if@elptfont\if@letterpaper\linebreak[4]\fi\fi}%
-\newcommand{\snip}{%
-  \vskip 1ex{\centering
-  \textasteriskcentered~\textasteriskcentered~\textasteriskcentered
-  \par}\vskip 1ex}%
-\newcommand{\wrapadj}{\raggedright\hspace{1em}}
-
 \AtBeginEnvironment{description}{\small}
 \AtBeginEnvironment{quotation}{\small}
 \AtBeginEnvironment{quote}{\small}
@@ -412,17 +397,20 @@
 \AtBeginEnvironment{verse}{\small}
 \AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
 
+% For enumitem:
 \setlist{noitemsep}
 \setlist[description]{font=\bfseries,format=\addcolon}
 \newcommand{\addcolon}[1]{#1:}%
 
-\newcommand{\attrib}[1]{%
-  \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
+% For verse:
+\setlength{\afterpoemtitleskip}{1.5ex \@plus.2ex}
 \setlength{\beforepoemtitleskip}{0pt}
 \renewcommand{\poemtitlefont}{\scshape\centering}%
-\newcommand{\poke}[1]{\makebox[0pt][r]{#1}}%
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
+\newcommand{\attrib}[1]{%
+  \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
+\newcommand{\poke}[1]{\makebox[0pt][r]{#1}}%
 
 % For the Declaration of Independence:
 \newenvironment{decliststates}
@@ -444,10 +432,23 @@
    \fi}%
   {\end{itemize}}%
 
-% Pass 'width=\maxwidth' to includegraphics:
+\renewcommand{\@makefnmark}{%
+  \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
+\newenvironment{abstract}[1][]
+  {\begin{center}\textsc{#1}\end{center}\small}%
+  {}%
+\newcommand{\BCE}{\small{BCE}}%
+\newcommand{\CE}{\small{CE}}%
+\hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
+\newcommand{\llb}{\if@elptfont\if@letterpaper\linebreak[4]\fi\fi}%
 \newcommand{\maxwidth}{%
   \ifdim\Gin@nat@width>\columnwidth \columnwidth
   \else\Gin@nat@width\fi}%
+\newcommand{\snip}{%
+  \vskip 1ex{\centering
+  \textasteriskcentered~\textasteriskcentered~\textasteriskcentered
+  \par}\vskip 1ex}%
+\newcommand{\wrapadj}{\raggedright\hspace{1em}}%
 
 \usepackage[%
   anchorcolor=black,
