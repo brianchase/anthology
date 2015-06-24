@@ -109,8 +109,8 @@ but not always, use a more recent version of it. This isn't likely to
 cause problems if you try to compile the anthology on your own
 system, but it's possible. In short, the requirements are:
 
-* [TeX Live](http://www.tug.org/texlive) with [XeTeX](http://en.wikipedia.org/wiki/XeTeX "TeX Live")
-* [Windy City](http://github.com/brianchase/windycity) with [biblatex](http://www.ctan.org/pkg/biblatex "Windy City")
+* [TeX Live](http://www.tug.org/texlive "TeX Live") with [XeTeX](http://en.wikipedia.org/wiki/XeTeX "XeTeX")
+* [Windy City](http://github.com/brianchase/windycity "Windy City") with [biblatex](http://www.ctan.org/pkg/biblatex "biblatex")
 
 ## LICENSE
 
