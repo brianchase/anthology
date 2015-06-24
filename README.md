@@ -1,4 +1,4 @@
-# ABOUT
+## ABOUT
 
 This project aims to provide a free, open anthology of readings in the
 history of Western philosophy, drawing exclusively on works in the
@@ -14,10 +14,10 @@ letter paper, which is largely the same as that for A5 paper, and a
 one column ebook layout for half letter paper (8.5 × 5.5 in). Current
 binaries of the anthology are available at these links:
 
-* [ebook layout](http://hesperusisphosphorus.com/projects/anthology-ebook.pdf) (PDF)
-* [letter paper layout](http://hesperusisphosphorus.com/projects/anthology-letter.pdf) (PDF)
+* [eBook Layout](http://hesperusisphosphorus.com/projects/anthology-ebook.pdf "eBook Layout") (PDF)
+* [Letter Paper Layout](http://hesperusisphosphorus.com/projects/anthology-letter.pdf "Letter Paper Layout") (PDF)
 
-# CONTENTS
+## CONTENTS
 
 The anthology contains over fifty texts of widely varying lengths. I
 don't intend it as representative of Western philosophy. Nor do I
@@ -92,27 +92,27 @@ current:
 1. John Dewey – Morality is Social
 1. George Santayana – Scepticism and Animal Faith, chaps. 1–2
 
-# REQUIREMENTS
+## REQUIREMENTS
 
-The main requirement is [TeX Live](http://www.tug.org/texlive). I
-compile the anthology with whatever
+The main requirement is [TeX Live](http://www.tug.org/texlive "TeX
+Live"). I compile the anthology with whatever
 [version](https://www.archlinux.org/packages/?q=texlive) is in the
-official repositories at [Arch Linux](https://www.archlinux.org/),
-since that's my distribution of choice. In addition, the style
-compiles with [XeTeX](http://en.wikipedia.org/wiki/XeTeX), which is
-available with TeX Live, and [Windy
-City](http://github.com/brianchase/windycity), which isn't. The
-latter is my own style for
-[biblatex](http://www.ctan.org/pkg/biblatex) and formats citations in
-the text. Although biblatex comes with TeX Live, I often, but not
-always, use a more recent version of it. This isn't likely to cause
-problems if you try to compile the anthology on your own system, but
-it's possible. In short, the requirements are:
+official repositories at [Arch Linux](https://www.archlinux.org/ "Arch
+Linux"), since that's my distribution of choice. In addition, the
+style compiles with [XeTeX](http://en.wikipedia.org/wiki/XeTeX
+"XeTeX"), which is available with TeX Live, and [Windy
+City](http://github.com/brianchase/windycity "Windy City"), which
+isn't. The latter is my own style for
+[biblatex](http://www.ctan.org/pkg/biblatex "biblatex") and formats
+citations in the text. Although biblatex comes with TeX Live, I often,
+but not always, use a more recent version of it. This isn't likely to
+cause problems if you try to compile the anthology on your own
+system, but it's possible. In short, the requirements are:
 
-* [TeX Live](http://www.tug.org/texlive) with [XeTeX](http://en.wikipedia.org/wiki/XeTeX)
-* [Windy City](http://github.com/brianchase/windycity) with [biblatex](http://www.ctan.org/pkg/biblatex)
+* [TeX Live](http://www.tug.org/texlive) with [XeTeX](http://en.wikipedia.org/wiki/XeTeX "TeX Live")
+* [Windy City](http://github.com/brianchase/windycity) with [biblatex](http://www.ctan.org/pkg/biblatex "Windy City")
 
-# LICENSE
+## LICENSE
 
 All original content in this project is in the public domain. All
 works republished in this project are believed to be in the public
@@ -121,7 +121,7 @@ project and its contents may be copied, reproduced, distributed, or
 used for derivative works without permission. All content is presented
 as is, without warranty of any kind, either expressed or implied.
 
-# FEEDBACK
+## FEEDBACK
 
 Please feel free to send comments, questions, and suggestions. I would
 especially appreciate corrections.

@@ -1,4 +1,4 @@
-% Last modified: Thu 18 Jun 2015 01:47:02 PM EDT
+% Last modified: Tue 23 Jun 2015 05:56:27 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -88,7 +88,6 @@
   BoldFont=*Bold,
   ItalicFont=*Italic,
   BoldItalicFont=*BoldItalic]{GFSDidot}
-\let\lnn\liningnums
 \usepackage[greek,american]{babel}
 \newcommand{\grk}[1]{{\greekfont\foreignlanguage{greek}{#1}}}
 
@@ -104,7 +103,7 @@
   \parindent 1em%
   \normalfont\@thefnmark.\hspace{0.4em}#1}%
 \renewcommand{\@makefnmark}{%
-  \hbox{\@textsuperscript{\lnn{\@thefnmark}}}}
+  \hbox{\@textsuperscript{\liningnums{\@thefnmark}}}}
 \newcommand{\source}{%
   \@ifstar
     {\@ifnextchar[{\@xfootnote}{\@xfootnote[]}}%
@@ -243,7 +242,7 @@
   \setlength{\headheight}{24pt}
   \lhead{\parbox{\columnwidth}{\centering\itshape\@title}}%
   \rhead{\parbox{\columnwidth}{\centering\leftmark}}%
-  \fancyfoot[C]{\thepage}%
+  \fancyfoot[C]{\thepage}
 \else
   \setlength{\headheight}{14pt}
   \fancyhead[LE,RO]{\thepage}
@@ -261,7 +260,7 @@
 \setcounter{secnumdepth}{0}
 \titleformat{\chapter}[display]
   {\thispagestyle{empty}
-   \huge\filcenter}{\lnn{\thechapter}}{0ex}
+   \huge\filcenter}{\liningnums{\thechapter}}{0ex}
   {\vbox to 8.4ex{%
      \LARGE\itshape #1\vskip 0.2ex
      \@addon\normalfont\normalsize\@textdate\vfill}}
@@ -361,7 +360,7 @@
 
 \newcommand{\authdate}[1]{\gdef\@authdate{(#1)}}%
 \newcommand{\textdate}[1]{\gdef\@textdate{(#1)}}%
-\newcommand{\version}[1]{\gdef\@version{\lnn{#1}}}%
+\newcommand{\version}[1]{\gdef\@version{\liningnums{#1}}}%
 \gdef\@author{}%
 \gdef\@authdate{}%
 \gdef\@textdate{}%
