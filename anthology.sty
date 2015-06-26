@@ -1,4 +1,4 @@
-% Last modified: Tue 23 Jun 2015 05:56:27 PM EDT
+% Last modified: Fri 26 Jun 2015 05:51:49 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -18,9 +18,9 @@
 \newif\if@letterpaper
 \newif\if@teptfont
 \newif\if@twptfont
-\DeclareOption{10pt}{\@teptfonttrue}
-\DeclareOption{11pt}{\@elptfonttrue}
-\DeclareOption{12pt}{\@twptfonttrue}
+\@teptfonttrue % The font is 10pt by default
+\DeclareOption{11pt}{\@elptfonttrue\@teptfontfalse}
+\DeclareOption{12pt}{\@twptfonttrue\@teptfontfalse}
 \DeclareOption{brackets}{\@bracketstrue}
 \DeclareOption{a4paper}{\@letterpapertrue\@ebookfalse}
 \DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
@@ -112,7 +112,7 @@
   \@zfootnote{Republished~from~\fullcite*[#1]{#2}}}
 \def\@yfootnote[#1]#2{%
   \@zfootnote{Republished~from~\fullcite[#1]{#2}}}
-\long\def\@zfootnote#1{%
+\newcommand{\@zfootnote}[1]{%
   \insert\footins{\normalfont\footnotesize
   \interlinepenalty\interfootnotelinepenalty
   \splittopskip\footnotesep
@@ -200,7 +200,7 @@
   \ifnum \c@secnumdepth >\m@ne
     \if@mainmatter
       \refstepcounter{chapter}%
-      \typeout{\@chapapp\space\thechapter.}%
+      \typeout{\@chapapp~\thechapter.}%
       \ifdefempty{\@author}
         {\addcontentsline{toc}{chapter}{%
            \protect\numberline{\thechapter}#1}}%
@@ -261,11 +261,12 @@
 \titleformat{\chapter}[display]
   {\thispagestyle{empty}
    \huge\filcenter}{\liningnums{\thechapter}}{0ex}
-  {\vbox to 8.4ex{%
+  {\vbox to 7.8ex{% font-specific
      \LARGE\itshape #1\vskip 0.2ex
-     \@addon\normalfont\normalsize\@textdate\vfill}}
-  [\normalfont\large\@author\vskip 0.2ex
-   \normalsize\@authdate
+     \@addon\normalfont\normalsize\@textdate\vfil}}
+  [\vbox to 5ex{%
+     \normalfont\large\@author\vskip 0.2ex
+     \normalsize\@authdate\vfil}%
    \gdef\@textdate{}%
    \gdef\@author{}%
    \gdef\@authdate{}%
@@ -273,14 +274,14 @@
 \titleformat{\section}
   {\normalfont\bfseries\filcenter}{\thesection.}{2ex}{#1}
 \titleformat{\subsection}
-  {\normalfont\itshape\filcenter}{\thesubsection.}{2ex}{#1}
+  {\normalfont\bfseries\filcenter}{\thesubsection.}{2ex}{#1}
 \titleformat{\subsubsection}
-  {\normalfont\itshape\filcenter}{\thesubsubsection.}{2ex}{#1}
+  {\normalfont\bfseries\filcenter}{\thesubsubsection.}{2ex}{#1}
 \titleformat{\paragraph}[runin]
   {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{#1}
 \titleformat{\subparagraph}[runin]
   {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{#1}
-\titlespacing*{\chapter}{3ex}{-\topskip}{4.2em}[3ex]
+\titlespacing*{\chapter}{3ex}{-\topskip}{8ex}[3ex]
 \titlespacing*{\section}
   {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
 \titlespacing*{\subsection}
@@ -292,7 +293,7 @@
   \begin{center}
     \LARGE\itshape #1
   \end{center}
-  \vskip 3em}%
+  \vskip 6ex}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Original Source Page Breaks  %%
@@ -358,8 +359,8 @@
 %%  Fields and Links  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\authdate}[1]{\gdef\@authdate{(#1)}}%
-\newcommand{\textdate}[1]{\gdef\@textdate{(#1)}}%
+\newcommand{\authdate}[1]{\ifblank{#1}{}{\gdef\@authdate{(#1)}}}
+\newcommand{\textdate}[1]{\ifblank{#1}{}{\gdef\@textdate{(#1)}}}
 \newcommand{\version}[1]{\gdef\@version{\liningnums{#1}}}%
 \gdef\@author{}%
 \gdef\@authdate{}%
