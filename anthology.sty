@@ -1,4 +1,4 @@
-% Last modified: Fri 26 Jun 2015 05:51:49 PM EDT
+% Last modified: Wed 01 Jul 2015 04:08:28 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -216,19 +216,15 @@
   \chaptermark{#1}%
   \addtocontents{lof}{\protect\addvspace{10\p@}}%
   \addtocontents{lot}{\protect\addvspace{10\p@}}%
-    \@makechapterhead{#2}%
-    \@afterheading}%
+  \@makechapterhead{#2}%
+  \@afterheading}%
 \def\@schapter#1{%
   \@makeschapterhead{#1}%
   \@afterheading}%
 \renewcommand{\backmatter}{%
-  \if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi
+  \if@openright\cleardoublepage\else\clearpage\fi
   \@mainmatterfalse
-  \addtocontents{toc}{\vskip 1.0em}}%
+  \addtocontents{toc}{\vskip 1ex}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Headers and Footers  %%
