@@ -1,4 +1,4 @@
-% Last modified: Fri 03 Jul 2015 06:12:57 PM EDT
+% Last modified: Sat 04 Jul 2015 12:11:37 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -213,12 +213,16 @@
 \titleformat{\subparagraph}[runin]
   {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{#1}
 \titlespacing*{\chapter}{4ex}{-\topskip}{8ex}[4ex]
+\newlength{\presectskip}
+\setlength{\presectskip}{3.25ex plus 1ex minus .2ex}
+\newlength{\aftsectskip}
+\setlength{\aftsectskip}{1.5ex plus .2ex}
 \titlespacing*{\section}
-  {4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[4ex]
+  {4ex}{\presectskip}{\aftsectskip}[4ex]
 \titlespacing*{\subsection}
-  {4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[4ex]
+  {4ex}{\presectskip}{\aftsectskip}[4ex]
 \titlespacing*{\subsubsection}
-  {4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[4ex]
+  {4ex}{\presectskip}{\aftsectskip}[4ex]
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
@@ -294,12 +298,10 @@
     \if@nobreak
       \marginnote{\@mypage}%
     \else
-      \vspace{\sectionskip}%
+      \vspace{\presectskip}%
       \marginnote{\@mypage}\nobreak
     \fi
     \@afterindentfalse\@afterheading}%
-  \newlength{\sectionskip}
-  \setlength{\sectionskip}{3.25ex \@plus 1ex \@minus .2ex}
   \newcommand{\@xpage}{%
     \ifx\@mytoken\begin\@ypage\else\@zpage\fi}%
   \newcommand{\@ypage}{%
@@ -380,14 +382,20 @@
 \newcommand{\addcolon}[1]{#1:}%
 
 % For verse:
-\setlength{\afterpoemtitleskip}{1.5ex \@plus.2ex}
-\setlength{\beforepoemtitleskip}{0pt}
-\renewcommand{\poemtitlefont}{\scshape\centering}%
+\setlength{\afterpoemtitleskip}{\aftsectskip}
+\setlength{\beforepoemtitleskip}{\presectskip}
 \setlength{\vgap}{\parindent}
 \setlength{\vleftskip}{\parindent}
 \newcommand{\attrib}[1]{%
   \nopagebreak{\hfil\hfil\small\textsc{#1}\medskip}}%
+\renewcommand{\poemtitlefont}{\scshape\centering}%
 \newcommand{\poke}[1]{\makebox[0pt][r]{#1}}%
+\renewcommand{\@vstypeptitle}[1]{%
+  \if@nobreak\else
+    \vspace{\beforepoemtitleskip}%
+  \fi
+  {\poemtitlefont #1\par}%
+  \vspace{\afterpoemtitleskip}}%
 
 % For abstracts and the like:
 \newenvironment{abstract}[2][]
