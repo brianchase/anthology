@@ -1,4 +1,4 @@
-% Last modified: Wed 01 Jul 2015 04:08:28 PM EDT
+% Last modified: Fri 03 Jul 2015 06:12:57 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -91,50 +91,6 @@
 \usepackage[greek,american]{babel}
 \newcommand{\grk}[1]{{\greekfont\foreignlanguage{greek}{#1}}}
 
-%%%%%%%%%%%%%
-%%  Notes  %%
-%%%%%%%%%%%%%
-
-\usepackage[backend=biber,style=windycity]{biblatex}
-\usepackage{csquotes}
-\bibliography{anthology}
-\usepackage[stable]{footmisc}
-\renewcommand{\@makefntext}[1]{%
-  \parindent 1em%
-  \normalfont\@thefnmark.\hspace{0.4em}#1}%
-\renewcommand{\@makefnmark}{%
-  \hbox{\@textsuperscript{\liningnums{\@thefnmark}}}}
-\newcommand{\source}{%
-  \@ifstar
-    {\@ifnextchar[{\@xfootnote}{\@xfootnote[]}}%
-    {\@ifnextchar[{\@yfootnote}{\@yfootnote[]}}}
-\def\@xfootnote[#1]#2{%
-  \@zfootnote{Republished~from~\fullcite*[#1]{#2}}}
-\def\@yfootnote[#1]#2{%
-  \@zfootnote{Republished~from~\fullcite[#1]{#2}}}
-\newcommand{\@zfootnote}[1]{%
-  \insert\footins{\normalfont\footnotesize
-  \interlinepenalty\interfootnotelinepenalty
-  \splittopskip\footnotesep
-  \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
-  \hsize\columnwidth \@parboxrestore
-  \footnoterule
-  {\rule{\z@}{\footnotesep}\ignorespaces
-    #1\strut}}}
-\setlength{\bibhang}{1.1em}
-\defbibheading{bibliography}{%
-  \chapter*{Bibliography}
-  \addcontentsline{toc}{schapter}{Bibliography}
-  \markright{Bibliography}}%
-\defbibheading{references}{%
-  \chapter*{References}
-  \addcontentsline{toc}{schapter}{References}
-  \markright{References}}%
-\if@brackets\else
-  \usepackage{marginnote}
-  \renewcommand{\marginfont}{\normalfont\small}%
-\fi
-
 %%%%%%%%%%%%%%%%%%
 %%  Title Page  %%
 %%%%%%%%%%%%%%%%%%
@@ -167,51 +123,34 @@
     \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
   \@starttoc{toc}}%
 \renewcommand*{\l@chapter}[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 1ex \@plus\p@
-    \setlength\@tempdima{1.6em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      \hangindent=1.1em\hangafter=1{#1\nobreak\hfil
-      \nobreak\hb@xt@\@pnumwidth{\hss #2}}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}%
+  \addpenalty{-\@highpenalty}%
+  \vskip 1.2ex
+  \setlength\@tempdima{1.6em}%
+  \begingroup
+    \parindent \z@ \rightskip \@pnumwidth
+    \parfillskip -\@pnumwidth
+    \leavevmode \if@schap\itshape\fi
+    \advance\leftskip\@tempdima
+    \hskip -\leftskip
+    \hangindent=1.1em\hangafter=1{#1\nobreak\hfil
+    \nobreak\hb@xt@\@pnumwidth{\hss #2}}\par
+    \penalty\@highpenalty
+  \endgroup}%
+\newif\if@schap
 \newcommand*{\l@schapter}[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \setlength\@tempdima{1.6em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode \itshape
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}%
+  \@schaptrue\l@chapter{#1}{#2}\@schapfalse}%
 \def\@chapter[#1]#2{%
-  \ifnum \c@secnumdepth >\m@ne
-    \if@mainmatter
-      \refstepcounter{chapter}%
-      \typeout{\@chapapp~\thechapter.}%
-      \ifdefempty{\@author}
-        {\addcontentsline{toc}{chapter}{%
-           \protect\numberline{\thechapter}#1}}%
-        {\addcontentsline{toc}{chapter}{%
-           \protect\numberline{\thechapter}#1\\
-           \itshape\@author}}%
-    \else
-      \addcontentsline{toc}{schapter}{#1}%
-    \fi
+  \if@mainmatter
+    \refstepcounter{chapter}%
+    \typeout{\@chapapp\space\thechapter.}%
+    \ifdefempty{\@author}
+      {\addcontentsline{toc}{chapter}{%
+         \protect\numberline{\thechapter}#1}}%
+      {\addcontentsline{toc}{chapter}{%
+         \protect\numberline{\thechapter}#1\\
+         \itshape\@author}}%
   \else
-    \addcontentsline{toc}{chapter}{#1}%
+    \addcontentsline{toc}{schapter}{#1}%
   \fi
   \chaptermark{#1}%
   \addtocontents{lof}{\protect\addvspace{10\p@}}%
@@ -221,10 +160,6 @@
 \def\@schapter#1{%
   \@makeschapterhead{#1}%
   \@afterheading}%
-\renewcommand{\backmatter}{%
-  \if@openright\cleardoublepage\else\clearpage\fi
-  \@mainmatterfalse
-  \addtocontents{toc}{\vskip 1ex}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Headers and Footers  %%
@@ -277,19 +212,65 @@
   {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{#1}
 \titleformat{\subparagraph}[runin]
   {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{#1}
-\titlespacing*{\chapter}{3ex}{-\topskip}{8ex}[3ex]
+\titlespacing*{\chapter}{4ex}{-\topskip}{8ex}[4ex]
 \titlespacing*{\section}
-  {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
+  {4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[4ex]
 \titlespacing*{\subsection}
-  {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
+  {4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[4ex]
 \titlespacing*{\subsubsection}
-  {3ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[3ex]
+  {4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}[4ex]
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
     \LARGE\itshape #1
   \end{center}
   \vskip 6ex}%
+
+%%%%%%%%%%%%%
+%%  Notes  %%
+%%%%%%%%%%%%%
+
+\usepackage[backend=biber,style=windycity]{biblatex}
+\bibliography{anthology}
+\setlength{\bibhang}{1.1em}
+\setlength{\bibitemsep}{1.2ex}% To align with TOC
+\AtBeginBibliography{\vskip 1.2ex}% To align with TOC
+\defbibheading{bibliography}{%
+  \chapter*{Bibliography}
+  \addcontentsline{toc}{schapter}{Bibliography}
+  \markright{Bibliography}}%
+\defbibheading{references}{%
+  \chapter*{References}
+  \addcontentsline{toc}{schapter}{References}
+  \markright{References}}%
+\usepackage{csquotes}
+\usepackage[stable]{footmisc}
+\renewcommand{\@makefntext}[1]{%
+  \parindent 1em%
+  \normalfont\@thefnmark.\hspace{0.4em}#1}%
+\renewcommand{\@makefnmark}{%
+  \hbox{\@textsuperscript{\liningnums{\@thefnmark}}}}
+\newcommand{\source}{%
+  \@ifstar
+    {\@ifnextchar[{\@xfootnote}{\@xfootnote[]}}%
+    {\@ifnextchar[{\@yfootnote}{\@yfootnote[]}}}
+\def\@xfootnote[#1]#2{%
+  \@zfootnote{Republished~from~\fullcite*[#1]{#2}}}
+\def\@yfootnote[#1]#2{%
+  \@zfootnote{Republished~from~\fullcite[#1]{#2}}}
+\newcommand{\@zfootnote}[1]{%
+  \insert\footins{\normalfont\footnotesize
+  \interlinepenalty\interfootnotelinepenalty
+  \splittopskip\footnotesep
+  \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+  \hsize\columnwidth \@parboxrestore
+  \footnoterule
+  {\rule{\z@}{\footnotesep}\ignorespaces
+    #1\strut}}}
+\if@brackets\else
+  \usepackage{marginnote}
+  \renewcommand{\marginfont}{\normalfont\small}%
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Original Source Page Breaks  %%
@@ -317,7 +298,7 @@
       \marginnote{\@mypage}\nobreak
     \fi
     \@afterindentfalse\@afterheading}%
-  \newlength{\sectionskip}%
+  \newlength{\sectionskip}
   \setlength{\sectionskip}{3.25ex \@plus 1ex \@minus .2ex}
   \newcommand{\@xpage}{%
     \ifx\@mytoken\begin\@ypage\else\@zpage\fi}%
@@ -344,7 +325,7 @@
       \cleaders\copy\brkbox\hskip\wd\brkbox
       \marginnote{\@mypage}\ignorespaces
     \fi}%
-  \newlength{\verseadj}%
+  \newlength{\verseadj}
   \setlength{\verseadj}{% Font-specific; assumes OldStyle
     \if@teptfont 6.2pt\fi\if@elptfont 6.4pt\fi\if@twptfont 7pt\fi}%
   \newsavebox{\brkbox}%
@@ -385,7 +366,6 @@
 \else
   \usepackage{multicol}% For multi-column text
 \fi
-\usepackage{wrapfig}% For inset text and figures
 \usepackage{verse}% Handy for longer poems
 
 \AtBeginEnvironment{description}{\small}
@@ -393,7 +373,6 @@
 \AtBeginEnvironment{quote}{\small}
 \AtBeginEnvironment{tabular}{\small}
 \AtBeginEnvironment{verse}{\small}
-\AtBeginEnvironment{wrapfigure}{\footnotesize\itshape}
 
 % For enumitem:
 \setlist{noitemsep}
@@ -462,7 +441,6 @@
   \vskip 1ex{\centering
   \textasteriskcentered~\textasteriskcentered~\textasteriskcentered
   \par}\vskip 1ex}%
-\newcommand{\wrapadj}{\raggedright\hspace{1em}}%
 
 \usepackage[%
   anchorcolor=black,
