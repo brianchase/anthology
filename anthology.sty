@@ -1,4 +1,4 @@
-% Last modified: Mon 06 Jul 2015 01:37:53 PM EDT
+% Last modified: Mon 06 Jul 2015 04:49:53 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -194,14 +194,14 @@
    \huge\filcenter}{\liningnums{\thechapter}}{0ex}
   {\vbox to 7.8ex{% font-specific
      \LARGE\itshape #1\vskip 0.2ex
-     \@addon\normalfont\normalsize\@textdate\vfil}}
-  [\vbox to 5ex{%
+     \large\@addon\normalfont\normalsize\@textdate\vfil}}
+  [\vskip -2.5ex\vbox to 3ex{% font-specific
      \normalfont\large\@author\vskip 0.2ex
      \normalsize\@authdate\vfil}%
-   \gdef\@textdate{}%
-   \gdef\@author{}%
+   \gdef\@addon{}%
    \gdef\@authdate{}%
-   \gdef\@addon{}]
+   \gdef\@author{}%
+   \gdef\@textdate{}]
 \titleformat{\section}
   {\normalfont\bfseries\filcenter}{\thesection.}{2ex}{#1}
 \titleformat{\subsection}
@@ -212,17 +212,21 @@
   {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{#1}
 \titleformat{\subparagraph}[runin]
   {\normalfont\normalsize\bfseries}{\thesubparagraph}{2ex}{#1}
-\titlespacing*{\chapter}{4ex}{-\topskip}{8ex}[4ex]
+\newlength{\chapsep}
+\setlength{\chapsep}{3ex}% Change before \chapter as necessary
+\newlength{\defchapsep}% To restore default after changes
+\setlength{\defchapsep}{\chapsep}
 \newlength{\presectskip}
 \setlength{\presectskip}{3.25ex plus 1ex minus .2ex}
 \newlength{\aftsectskip}
 \setlength{\aftsectskip}{1.5ex plus .2ex}
+\titlespacing*{\chapter}{\chapsep}{-\topskip}{10ex}[\chapsep]
 \titlespacing*{\section}
-  {4ex}{\presectskip}{\aftsectskip}[4ex]
+  {3ex}{\presectskip}{\aftsectskip}[3ex]
 \titlespacing*{\subsection}
-  {4ex}{\presectskip}{\aftsectskip}[4ex]
+  {3ex}{\presectskip}{\aftsectskip}[3ex]
 \titlespacing*{\subsubsection}
-  {4ex}{\presectskip}{\aftsectskip}[4ex]
+  {3ex}{\presectskip}{\aftsectskip}[3ex]
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
@@ -334,26 +338,24 @@
   \sbox{\brkbox}{$\,|\,$}%
 \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Fields and Links  %%
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%%  Fields  %%
+%%%%%%%%%%%%%%
 
-\newcommand{\authdate}[1]{\ifblank{#1}{}{\gdef\@authdate{(#1)}}}
-\newcommand{\textdate}[1]{\ifblank{#1}{}{\gdef\@textdate{(#1)}}}
-\newcommand{\version}[1]{\gdef\@version{\liningnums{#1}}}%
-\gdef\@author{}%
+\gdef\@addon{}%
 \gdef\@authdate{}%
+\gdef\@author{}%
 \gdef\@textdate{}%
 \gdef\@version{}%
 \newcommand{\addon}{\@ifnextchar[{\@xaddon}{\@yaddon}}%
-\def\@xaddon[#1]#2{\gdef\@addon{\large#2\\[0.2ex]#1\\[0.2ex]}}%
-\def\@yaddon#1{\gdef\@addon{\large#1\\[0.2ex]}}%
-\gdef\@addon{}%
+\def\@xaddon[#1]#2{\gdef\@addon{#2\\[0.2ex]#1\\[0.2ex]}}%
+\def\@yaddon#1{\gdef\@addon{#1\\[0.2ex]}}%
+\newcommand{\authdate}[1]{\ifblank{#1}{}{\gdef\@authdate{(#1)}}}
+\newcommand{\textdate}[1]{\ifblank{#1}{}{\gdef\@textdate{(#1)}}}
 \renewcommand{\title}[1]{%
   \gdef\@title{#1}%
   \hypersetup{pdftitle=\@title}}%
-\newcommand{\printversion}{%
-  \small\emph{\@title}\\version \@version}%
+\newcommand{\version}[1]{\gdef\@version{\liningnums{#1}}}%
 
 %%%%%%%%%%%%%%%%%%%%%
 %%  Miscellaneous  %%
@@ -416,6 +418,11 @@
   \item\relax}%
 \newcommand{\@abnone}{\trivlist\small\itshape\item\relax}%
 
+% For changing \chapsep by layout:
+\newcommand{\echapsep}[1]{\if@ebook\setlength{\chapsep}{#1}\fi}%
+\newcommand{\lchapsep}[1]{\if@letterpaper\setlength{\chapsep}{#1}\fi}%
+\newcommand{\restorechapsep}{\setlength{\chapsep}{\defchapsep}}%
+
 % For the Declaration of Independence:
 \newenvironment{decliststates}
   {\if@ebook
@@ -443,11 +450,12 @@
 \newcommand{\maxwidth}{%
   \ifdim\Gin@nat@width>\columnwidth \columnwidth
   \else\Gin@nat@width\fi}%
+\newcommand{\printversion}{%
+  \small\emph{\@title}\\version \@version}%
 \newcommand{\snip}{%
   \vskip 1ex{\centering
   \textasteriskcentered~\textasteriskcentered~\textasteriskcentered
   \par}\vskip 1ex}%
-
 \usepackage[%
   anchorcolor=black,
   breaklinks=true,
