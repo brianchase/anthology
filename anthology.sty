@@ -1,4 +1,4 @@
-% Last modified: Tue 07 Jul 2015 02:26:06 PM EDT
+% Last modified: Wed 08 Jul 2015 12:06:36 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -147,8 +147,8 @@
       {\addcontentsline{toc}{chapter}{%
          \protect\numberline{\thechapter}#1}}%
       {\addcontentsline{toc}{chapter}{%
-         \protect\numberline{\thechapter}#1\\
-         \itshape\@author}}%
+         \protect\numberline{\thechapter}#1
+         \texorpdfstring{\\\itshape\@author}{, \@author}}}
   \else
     \addcontentsline{toc}{schapter}{#1}%
   \fi
