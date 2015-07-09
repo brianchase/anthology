@@ -65,6 +65,7 @@ current:
 1. Immanuel Kant – Groundwork of the Metaphysics of Morals, excerpt
 1. Mary Wollstonecraft – A Vindication of the Rights of Woman, chap. 2
 1. William Godwin – Fénelon or the Chambermaid?
+1. G. W. F. Hegel – Lectures on the Philosophy of History, excerpt
 1. William Paley – Natural Theology, chaps. 1 and 2
 1. Alexis de Tocqueville – Tyranny of the Majority
 1. Ralph Waldo Emerson – The American Scholar
