@@ -1,4 +1,4 @@
-% Last modified: Wed 08 Jul 2015 01:08:14 PM EDT
+% Last modified: Sun 12 Jul 2015 11:26:14 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -285,7 +285,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \if@brackets
-  \newcommand{\page}[1]{$\,$[#1]$\,$}%
+  \newcommand{\page}[1]{%
+    \renewcommand{\@mypage}{[#1]}%
+    \futurelet\@mytoken\@pageparse}%
+  \newcommand{\@mypage}{}%
+  \newcommand{\@pageparse}{%
+    \ifx\@mytoken\section\@wpage\else\@xpage\fi}%
+  \newcommand{\@wpage}{%
+    \if@nobreak\@mypage\else
+      \vspace{\presectskip}%
+      \noindent\@mypage\nobreak
+    \fi
+    \@afterindentfalse\@afterheading}%
+  \newcommand{\@xpage}{%
+    \ifx\@mytoken\begin\@ypage\else\@zpage\fi}%
+  \newcommand{\@ypage}{%
+    \if@nobreak\else
+      \vspace{\partopsep}%
+      \vspace{\topsep}%
+    \fi
+    \noindent\@mypage}%
+  \newcommand{\@zpage}{%
+    \ifvmode\@mypage\space\else\@mypage\fi}%
 \else
 % The command below is from marginnote.sty. Adding '\nobreak' prevents
 % a page break between '\marginnote' and the text that follows it.
@@ -355,7 +376,7 @@
 \renewcommand{\title}[1]{%
   \gdef\@title{#1}%
   \hypersetup{pdftitle=\@title}}%
-\newcommand{\version}[1]{\gdef\@version{\liningnums{#1}}}%
+\newcommand{\version}[1]{\gdef\@version{\liningnums{#1}}}
 
 %%%%%%%%%%%%%%%%%%%%%
 %%  Miscellaneous  %%
