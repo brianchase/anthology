@@ -1,4 +1,4 @@
-% Last modified: Sun 12 Jul 2015 11:35:50 AM EDT
+% Last modified: Mon 13 Jul 2015 08:13:11 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -117,49 +117,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setcounter{tocdepth}{0}
+\usepackage{titletoc}
+\let\ttl@savel@schapter\l@schapter
+\def\l@schapter{\ttl@lselect{schapter}}%
+\def\ttll@schapter{0}
+\titlecontents{chapter}[1.5em]
+  {\ifcsstring{thecontentslabel}{1}{}{\addvspace{1.2ex}}}
+  {\contentslabel{1.5em}}{}
+  {\hfill\contentspage}
+\titlecontents{schapter}[0em]
+  {\addvspace{1.2ex}\itshape}{\contentslabel{1.5em}}{}
+  {\hfill\contentspage}
 \renewcommand{\tableofcontents}{%
   \if@twocolumn\clearpage\else\cleardoublepage\fi
   \chapter*{\contentsname
     \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
   \@starttoc{toc}}%
-\renewcommand*{\l@chapter}[2]{%
-  \addpenalty{-\@highpenalty}%
-  \vskip 1.2ex
-  \setlength\@tempdima{1.6em}%
-  \begingroup
-    \parindent \z@ \rightskip \@pnumwidth
-    \parfillskip -\@pnumwidth
-    \leavevmode \if@schap\itshape\fi
-    \advance\leftskip\@tempdima
-    \hskip -\leftskip
-    \hangindent=1.1em\hangafter=1{#1\nobreak\hfil
-    \nobreak\hb@xt@\@pnumwidth{\hss #2}}\par
-    \penalty\@highpenalty
-  \endgroup}%
-\newif\if@schap
-\newcommand*{\l@schapter}[2]{%
-  \@schaptrue\l@chapter{#1}{#2}\@schapfalse}%
-\def\@chapter[#1]#2{%
-  \if@mainmatter
-    \refstepcounter{chapter}%
-    \typeout{\@chapapp\space\thechapter.}%
-    \ifdefempty{\@author}
-      {\addcontentsline{toc}{chapter}{%
-         \protect\numberline{\thechapter}#1}}%
-      {\addcontentsline{toc}{chapter}{%
-         \protect\numberline{\thechapter}#1
-         \texorpdfstring{\\\itshape\@author}{– \@author}}}
-  \else
-    \addcontentsline{toc}{schapter}{#1}%
-  \fi
-  \chaptermark{#1}%
-  \addtocontents{lof}{\protect\addvspace{10\p@}}%
-  \addtocontents{lot}{\protect\addvspace{10\p@}}%
-  \@makechapterhead{#2}%
-  \@afterheading}%
-\def\@schapter#1{%
-  \@makeschapterhead{#1}%
-  \@afterheading}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Headers and Footers  %%
@@ -198,6 +171,8 @@
   [\vskip -2.5ex\vbox to 3.2ex{% font-specific
      \normalfont\large\@author\vskip 0.2ex
      \normalsize\@authdate\vfil}%
+   \ifdefempty{\@author}
+     {}{\addtocontents{toc}{\authortoc{\@author}}}
    \gdef\@addon{}%
    \gdef\@authdate{}%
    \gdef\@author{}%
@@ -227,6 +202,8 @@
   {3ex}{\presectskip}{\aftsectskip}[3ex]
 \titlespacing*{\subsubsection}
   {3ex}{\presectskip}{\aftsectskip}[3ex]
+\DeclareRobustCommand{\authortoc}[1]{%
+  {\nopagebreak\hspace*{1.1em}\itshape #1\par}}%
 \renewcommand{\@makeschapterhead}[1]{%
   \thispagestyle{empty}%
   \begin{center}
@@ -242,7 +219,6 @@
 \bibliography{anthology}
 \setlength{\bibhang}{1.1em}
 \setlength{\bibitemsep}{1.2ex}% To align with TOC
-\AtBeginBibliography{\vskip 1.2ex}% To align with TOC
 \defbibheading{bibliography}{%
   \chapter*{Sources}
   \addcontentsline{toc}{schapter}{Sources}
