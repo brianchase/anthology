@@ -1,4 +1,4 @@
-% Last modified: Mon 13 Jul 2015 08:13:11 AM EDT
+% Last modified: Wed 15 Jul 2015 09:05:10 AM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -118,15 +118,9 @@
 
 \setcounter{tocdepth}{0}
 \usepackage{titletoc}
-\let\ttl@savel@schapter\l@schapter
-\def\l@schapter{\ttl@lselect{schapter}}%
-\def\ttll@schapter{0}
 \titlecontents{chapter}[1.5em]
   {\ifcsstring{thecontentslabel}{1}{}{\addvspace{1.2ex}}}
-  {\contentslabel{1.5em}}{}
-  {\hfill\contentspage}
-\titlecontents{schapter}[0em]
-  {\addvspace{1.2ex}\itshape}{\contentslabel{1.5em}}{}
+  {\contentslabel{1.5em}}{\hspace*{-1.5em}\itshape}
   {\hfill\contentspage}
 \renewcommand{\tableofcontents}{%
   \if@twocolumn\clearpage\else\cleardoublepage\fi
@@ -221,11 +215,11 @@
 \setlength{\bibitemsep}{1.2ex}% To align with TOC
 \defbibheading{bibliography}{%
   \chapter*{Sources}
-  \addcontentsline{toc}{schapter}{Sources}
+  \addcontentsline{toc}{chapter}{Sources}
   \markright{Sources}}%
 \defbibheading{references}{%
   \chapter*{Sources}
-  \addcontentsline{toc}{schapter}{Sources}
+  \addcontentsline{toc}{chapter}{Sources}
   \markright{Sources}}%
 \usepackage{csquotes}
 \usepackage[stable]{footmisc}
