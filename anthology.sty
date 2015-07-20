@@ -1,4 +1,4 @@
-% Last modified: Mon 20 Jul 2015 11:51:56 AM EDT
+% Last modified: Mon 20 Jul 2015 01:25:18 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -223,10 +223,13 @@
   \addcontentsline{toc}{chapter}{Sources}
   \markright{Sources}}%
 \usepackage{csquotes}
-\usepackage[stable]{footmisc}
+\usepackage[norule,splitrule,stable]{footmisc}
+\renewcommand{\splitfootnoterule}{%
+  \kern-3\p@
+  \hrule\@width.4\columnwidth
+  \kern2.6\p@}%
 \renewcommand{\@makefntext}[1]{%
-  \parindent 1em%
-  \normalfont\@thefnmark.\hspace{0.4em}#1}%
+  \parindent 1em\normalfont\@thefnmark.\hspace{0.4em}#1}%
 \renewcommand{\@makefnmark}{%
   \hbox{\@textsuperscript{\liningnums{\@thefnmark}}}}
 \newcommand{\source}{%
