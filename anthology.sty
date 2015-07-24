@@ -1,4 +1,4 @@
-% Last modified: Mon 20 Jul 2015 01:25:18 PM EDT
+% Last modified: Fri 24 Jul 2015 12:37:36 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -16,20 +16,19 @@
 \newif\if@ebook
 \newif\if@elptfont
 \newif\if@letterpaper
+\newif\if@nofuss
 \newif\if@teptfont
 \newif\if@twptfont
-\@teptfonttrue % The font is 10pt by default
-\DeclareOption{11pt}{\@elptfonttrue\@teptfontfalse}
-\DeclareOption{12pt}{\@twptfonttrue\@teptfontfalse}
+\DeclareOption{10pt}{\@nofusstrue\@teptfonttrue}
+\DeclareOption{11pt}{\@elptfonttrue}
+\DeclareOption{12pt}{\@nofusstrue\@twptfonttrue}
+\DeclareOption{a4paper}{\@letterpapertrue}
 \DeclareOption{brackets}{\@bracketstrue}
-\DeclareOption{a4paper}{\@letterpapertrue\@ebookfalse}
-\DeclareOption{annotate}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \DeclareOption{collsonly}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
-\DeclareOption{ebook}{\@ebooktrue\@letterpaperfalse\@twocolumnfalse}
-\DeclareOption{firstshort}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
-\DeclareOption{letterpaper}{\@letterpapertrue\@ebookfalse}
+\DeclareOption{ebook}{\@ebooktrue\@nofusstrue}
+\DeclareOption{letterpaper}{\@letterpapertrue}
 \DeclareOption{reflist}{\PassOptionsToPackage{\CurrentOption}{biblatex}}
-\DeclareOption{twocolumn}{\@bracketstrue}
+\DeclareOption{twocolumn}{\@bracketstrue\@letterpapertrue\@nofusstrue}
 \ProcessOptions
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,23 +40,25 @@
 \clubpenalty=1000
 \widowpenalty=1500
 \usepackage{nowidow}
-\if@twocolumn
-  \flushbottom
+\if@twocolumn % For twocolumn
   \usepackage{fixltx2e}
   \setlength{\columnsep}{18pt}
-  \sloppy
 \else
   \raggedbottom
-  \if@teptfont\sloppy\fi % Use '\sloppy' with option 10pt
-  \if@twptfont\sloppy\fi % Use '\sloppy' with option 12pt
-  \if@ebook\sloppy\fi    % Use '\sloppy' with option ebook
 \fi
-
-\if@ebook % Basic layout for ebooks:
+\if@nofuss % For 10pt, 12pt, ebook, and twocolumn
+  \emergencystretch 1.5em
+  \hbadness 1414
+  \hfuzz 0.3pt
+  \tolerance 1414
+  \vfuzz\hfuzz
+\fi
+\if@letterpaper\@ebookfalse\fi
+\if@ebook % Basic layout for ebook
   \setlength{\paperheight}{8.5in}
   \setlength{\paperwidth}{5.5in}
   \setlength{\evensidemargin}{-30pt}
-%  \setlength{\headheight}{14pt}% Important but set below
+%  \setlength{\headheight}{14pt}% Set further below
   \setlength{\headsep}{8pt}
   \setlength{\marginparsep}{8pt}
   \setlength{\marginparwidth}{30pt}
@@ -159,11 +160,11 @@
 \setcounter{secnumdepth}{0}
 \titleformat{\chapter}[display]
   {\thispagestyle{empty}
-   \huge\filcenter}{\liningnums{\thechapter}}{0ex}
-  {\vbox to 7.8ex{% font-specific
+   \filcenter\huge}{\liningnums{\thechapter}}{0ex}
+  {\vbox to 7.8ex{% Font-specific
      \LARGE\itshape #1\vskip 0.2ex
      \large\@addon\normalfont\normalsize\@textdate\vfil}}
-  [\vskip -2.5ex\vbox to 3.2ex{% font-specific
+  [\vskip -2.5ex\vbox to 3.2ex{% Font-specific
      \normalfont\large\@author\vskip 0.2ex
      \normalsize\@authdate\vfil}%
    \ifdefempty{\@author}
@@ -173,11 +174,11 @@
    \gdef\@author{}%
    \gdef\@textdate{}]
 \titleformat{\section}
-  {\normalfont\bfseries\filcenter}{\thesection}{2ex}{#1}
+  {\filcenter\normalfont\bfseries}{\thesection}{2ex}{#1}
 \titleformat{\subsection}
-  {\normalfont\bfseries\filcenter}{\thesubsection}{2ex}{#1}
+  {\filcenter\normalfont\bfseries}{\thesubsection}{2ex}{#1}
 \titleformat{\subsubsection}
-  {\normalfont\bfseries\filcenter}{\thesubsubsection}{2ex}{#1}
+  {\filcenter\normalfont\bfseries}{\thesubsubsection}{2ex}{#1}
 \titleformat{\paragraph}[runin]
   {\normalfont\normalsize\bfseries}{\theparagraph}{2ex}{#1}
 \titleformat{\subparagraph}[runin]
@@ -396,20 +397,31 @@
 \newenvironment{abstract}[2][]
   {\ifblank{#1}{}{\section*{#1}}%
    \ifthenelse{\equal{#2}{c}\OR
-                 \equal{#2}{h}}
+                 \equal{#2}{h}\OR
+                 \equal{#2}{i}}
      {\ifstrequal{#2}{c}{\@abcent}{}%
-      \ifstrequal{#2}{h}{\@abhang}{}}%
+      \ifstrequal{#2}{h}{\@abhang}{}%
+      \ifstrequal{#2}{i}{\@abindent}{}}%
     {\ifblank{#2}{\@abnone}{\@abnone #2}}}
   {\endlist}%
 \newcommand{\@abcent}{%
-  \trivlist\small\itshape\centering\item\relax}%
+  \list{}{% Center with small indent:
+    \setlength{\leftmargin}{2.8ex}
+    \setlength{\rightmargin}{2.8ex}
+    \small\itshape}%
+  \centering\item\relax}%
 \newcommand{\@abhang}{%
-  \list{}{%
+  \list{}{% Hanging indent:
     \small\itshape
     \leftmargin=\parindent
     \parsep=\parskip
     \listparindent=\parindent
     \itemindent=-\parindent}%
+  \item\relax}%
+\newcommand{\@abindent}{%
+  \list{}{% Indented:
+    \small\itshape
+    \rightmargin\leftmargin}%
   \item\relax}%
 \newcommand{\@abnone}{\trivlist\small\itshape\item\relax}%
 
