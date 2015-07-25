@@ -1,4 +1,4 @@
-% Last modified: Fri 24 Jul 2015 12:37:36 PM EDT
+% Last modified: Sat 25 Jul 2015 03:02:07 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -128,7 +128,10 @@
   \if@twocolumn\clearpage\else\cleardoublepage\fi
   \chapter*{\contentsname
     \@mkboth{\itshape\contentsname}{\itshape\contentsname}}%
-  \@starttoc{toc}}%
+  \begingroup
+    \flushbottom
+    \@starttoc{toc}%
+  \endgroup}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Headers and Footers  %%
