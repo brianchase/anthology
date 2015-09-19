@@ -1,4 +1,4 @@
-% Last modified: Fri 14 Aug 2015 01:23:35 PM EDT
+% Last modified: Sat 19 Sep 2015 03:35:04 PM EDT
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -38,8 +38,8 @@
 \frenchspacing
 \setlength{\parindent}{1.1em}
 \clubpenalty=1000
-\widowpenalty=1500
-\usepackage{nowidow}
+%\widowpenalty=1500
+\widowpenalty=10000
 \if@twocolumn % For twocolumn
   \usepackage{fixltx2e}
   \setlength{\columnsep}{18pt}
@@ -369,7 +369,6 @@
 \fi
 \usepackage{verse}% Handy for longer poems
 
-\AtBeginEnvironment{description}{\small}
 \AtBeginEnvironment{quotation}{\small}
 \AtBeginEnvironment{quote}{\small}
 \AtBeginEnvironment{tabular}{\small}
@@ -453,8 +452,8 @@
    \fi}%
   {\end{itemize}}%
 
-\newcommand{\BCE}{\small{BCE}}%
-\newcommand{\CE}{\small{CE}}%
+\newcommand{\BCE}{{\small BCE}}%
+\newcommand{\CE}{{\small CE}}%
 \hyphenation{Al-ex-an-der Hough-ton mor-als Wil-liam}% For citations
 \newcommand{\llb}{%
   \if@twocolumn\else

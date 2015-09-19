@@ -31,9 +31,7 @@ Still others merely demonstrate what sort of material is available in
 the public domain, even if I'd always prefer to assign contemporary
 editions of those texts. And finally, I've added some texts because
 they might serve, or have served, as primary or supplemental readings
-for my courses. Perhaps I'll add a dozen or so texts before
-considering the anthology complete. In any case, the list below is
-current:
+for my courses.
 
 1. Thucydides – Pericles' Funeral Oration
 1. Plato – Euthyphro
@@ -61,7 +59,6 @@ current:
 1. Jean-Jacques Rousseau – A Discourse on the Arts and Sciences
 1. Voltaire – The Lisbon Earthquake
 1. Cesare Beccaria – On Crimes and Punishments, excerpt
-1. Thomas Jefferson – Declaration of Independence
 1. Immanuel Kant – Groundwork of the Metaphysics of Morals, excerpt
 1. Mary Wollstonecraft – A Vindication of the Rights of Woman, chap. 2
 1. William Godwin – Fénelon or the Chambermaid?
@@ -80,18 +77,24 @@ current:
 1. Charles Sanders Peirce – The Fixation of Belief
 1. Fyodor Dostoevsky – The Brothers Karamazov, excerpt
 1. Jane Addams – The Subjective Necessity for Social Settlements
-1. Jane Addams – Democracy and Social Ethics, chap. 1
 1. W. E. B. Du Bois – Of Our Spiritual Strivings
-1. G. E. Moore – The Naturalistic Fallacy
 1. Mark Twain – The War Prayer
-1. Emma Goldman – The Tragedy of Woman's Emancipation
 1. Emma Goldman – Anarchism: What It Really Stands For
 1. William James – What Pragmatism Means
-1. Miguel de Unamuno – My Religion
 1. Miguel de Unamuno – Tragic Sense of Life, chap. 3
+1. G. E. Moore – Results the Test of Right and Wrong
 1. Bertrand Russell – The Value of Philosophy
 1. John Dewey – Morality is Social
-1. George Santayana – Scepticism and Animal Faith, chaps. 1–2
+1. George Santayana – Scepticism and Animal Faith, chaps. 1 and 2
+
+The project also has a small collection of supplementary texts that
+aren't included in the official binaries.
+
+1. Thomas Jefferson – Declaration of Independence
+1. Jane Addams – Democracy and Social Ethics, chap. 1
+1. G. E. Moore – The Naturalistic Fallacy
+1. Emma Goldman – The Tragedy of Woman's Emancipation
+1. Miguel de Unamuno – My Religion
 
 ## REQUIREMENTS
 
