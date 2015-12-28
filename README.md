@@ -60,6 +60,7 @@ for my courses.
 1. Voltaire – The Lisbon Earthquake
 1. Cesare Beccaria – On Crimes and Punishments, excerpt
 1. Immanuel Kant – Groundwork of the Metaphysics of Morals, excerpt
+1. James Madison – The Federalist. No. X.
 1. Mary Wollstonecraft – A Vindication of the Rights of Woman, chap. 2
 1. William Godwin – Fénelon or the Chambermaid?
 1. William Paley – Natural Theology, chaps. 1 and 2
