@@ -69,7 +69,7 @@ for my courses.
 1. Ralph Waldo Emerson – The American Scholar
 1. Margaret Fuller – Woman in the Nineteenth Century, excerpt
 1. Elizabeth Cady Stanton – Declaration of Sentiments
-1. Aurthur Schopenhauer – On the Sufferings of the World
+1. Arthur Schopenhauer – On the Sufferings of the World
 1. Frederick Douglass – What to the Slave is the Fourth of July?
 1. Karl Marx – A Contribution to the Critique of Political Economy, excerpt
 1. John Stuart Mill – Utilitarianism, chap. 2
@@ -92,6 +92,7 @@ The project also has a small collection of supplementary texts that
 aren't included in the official binaries.
 
 1. Thomas Jefferson – Declaration of Independence
+1. Madame de Staël – Of the Influence of Enthusiasm upon Happiness
 1. Jane Addams – Democracy and Social Ethics, chap. 1
 1. G. E. Moore – The Naturalistic Fallacy
 1. Emma Goldman – The Tragedy of Woman's Emancipation
