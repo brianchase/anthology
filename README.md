@@ -49,6 +49,7 @@ for my courses.
 1. René Descartes – Meditations on First Philosophy, 1 and 2
 1. Thomas Hobbes – Leviathan, chaps. 13 and 17
 1. Blaise Pascal – Pascal's Wager
+1. Margaret Cavendish – Of the Rational Soul of Man
 1. Benedict de Spinoza – A Theological-Political Treatise, chap. 20
 1. John Locke – Of Identity and Diversity, excerpt
 1. Mary Astell – Some Reflections upon Marriage, excerpt
