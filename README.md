@@ -25,13 +25,13 @@ select a text with much thought about whether it's representative of
 that figure or in some way historically important. I don't even worry
 about whether the figure typically counts as a philosopher. Some
 selections caught my attention because I find them entertaining, like
-the ones from Gellius, Stevenson, and Twain. Others represent a genre
-of sorts or have been useful for stimulating discussion in class.
-Still others merely demonstrate what sort of material is available in
-the public domain, even if I'd always prefer to assign contemporary
-editions of those texts. And finally, I've added some texts because
-they might serve, or have served, as primary or supplemental readings
-for my courses.
+the ones from Gellius and Twain. Others represent a genre of sorts or
+have been useful for stimulating discussion in class. Still others
+merely demonstrate what sort of material is available in the public
+domain, even if I'd always prefer to assign contemporary editions of
+those texts. And finally, I've added some texts because they might
+serve, or have served, as primary or supplemental readings for my
+courses.
 
 1. Thucydides – Pericles' Funeral Oration
 1. Plato – Euthyphro
@@ -75,7 +75,6 @@ for my courses.
 1. Karl Marx – A Contribution to the Critique of Political Economy, excerpt
 1. John Stuart Mill – Utilitarianism, chap. 2
 1. Susan B. Anthony – Speech on Receiving Her Sentence
-1. Robert Louis Stevenson – An Apology for Idlers
 1. Charles Sanders Peirce – The Fixation of Belief
 1. Fyodor Dostoevsky – The Brothers Karamazov, excerpt
 1. Jane Addams – The Subjective Necessity for Social Settlements
@@ -94,6 +93,7 @@ aren't included in the official binaries.
 
 1. Thomas Jefferson – Declaration of Independence
 1. Madame de Staël – Of the Influence of Enthusiasm upon Happiness
+1. Robert Louis Stevenson – An Apology for Idlers
 1. Jane Addams – Democracy and Social Ethics, chap. 1
 1. G. E. Moore – The Naturalistic Fallacy
 1. Emma Goldman – The Tragedy of Woman's Emancipation
