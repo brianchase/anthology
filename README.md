@@ -46,6 +46,7 @@ courses.
 1. Anselm of Canterbury – Proslogium, chaps. 2–4
 1. Thomas Aquinas – Five Ways
 1. Francesco Petrarca (Petrarch) – The Ascent of Mont Ventoux
+1. Michel de Montaigne – That to Study Philosophy is to Learn to Die
 1. René Descartes – Meditations on First Philosophy, 1 and 2
 1. Thomas Hobbes – Leviathan, chaps. 13 and 17
 1. Blaise Pascal – Pascal's Wager
