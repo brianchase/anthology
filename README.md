@@ -14,8 +14,8 @@ letter paper, which is largely the same as that for A5 paper, and a
 one column ebook layout for half letter paper (8.5 × 5.5 in). Current
 binaries of the anthology are available at these links:
 
-* [eBook Layout](http://hesperusisphosphorus.com/projects/anthology-ebook.pdf "eBook Layout") (PDF)
-* [Letter Paper Layout](http://hesperusisphosphorus.com/projects/anthology-letter.pdf "Letter Paper Layout") (PDF)
+* [eBook Layout](https://s3.amazonaws.com/philos-public/anthology-ebook.pdf "eBook Layout") (PDF)
+* [Letter Paper Layout](https://s3.amazonaws.com/philos-public/anthology-letter.pdf "Letter Paper Layout") (PDF)
 
 ## CONTENTS
 
@@ -135,5 +135,4 @@ Please feel free to send comments, questions, and suggestions. I would
 especially appreciate corrections.
 
 * http://github.com/brianchase/anthology
-* http://hesperusisphosphorus.com
 
