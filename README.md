@@ -1,3 +1,5 @@
+# Anthology
+
 ## ABOUT
 
 This project aims to provide a free, open anthology of readings in the
