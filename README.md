@@ -131,10 +131,3 @@ project and its contents may be copied, reproduced, distributed, or
 used for derivative works without permission. All content is presented
 as is, without warranty of any kind, either expressed or implied.
 
-## FEEDBACK
-
-Please feel free to send comments, questions, and suggestions. I would
-especially appreciate corrections.
-
-* http://github.com/brianchase/anthology
-
