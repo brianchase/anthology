@@ -1,6 +1,6 @@
 # Anthology
 
-## ABOUT
+## About
 
 This project aims to provide a free, open anthology of readings in the
 history of Western philosophy, drawing exclusively on works in the
@@ -13,27 +13,26 @@ material. This may change someday.
 The project's style file, `anthology.sty`, permits different layouts.
 For the most part, however, I work on two: a one column layout for
 letter paper, which is largely the same as that for A5 paper, and a
-one column ebook layout for half letter paper (8.5 × 5.5 in). Current
-binaries of the anthology are available at these links:
+one column ebook layout for half letter paper (8.5 in × 5.5 in).
+Current binaries of the anthology are available here:
 
 * [eBook Layout](https://s3.amazonaws.com/brianchase/anthology-ebook.pdf "eBook Layout") (PDF)
 * [Letter Paper Layout](https://s3.amazonaws.com/brianchase/anthology-letter.pdf "Letter Paper Layout") (PDF)
 
-## CONTENTS
+## Contents
 
-The anthology contains over fifty texts of widely varying lengths. I
-don't intend it as representative of Western philosophy. Nor do I
-select a text with much thought about whether it's representative of
-that figure or in some way historically important. I don't even worry
-about whether the figure typically counts as a philosopher. Some
-selections caught my attention because I find them entertaining, like
-the ones from Gellius and Twain. Others represent a genre of sorts or
-have been useful for stimulating discussion in class. Still others
-merely demonstrate what sort of material is available in the public
-domain, even if I'd always prefer to assign contemporary editions of
-those texts. And finally, I've added some texts because they might
-serve, or have served, as primary or supplemental readings for my
-courses.
+The anthology contains over fifty texts of varying lengths. I don't
+intend it as representative of Western philosophy. Nor do I select a
+text with much thought about whether it's representative of that
+figure or in some way historically important. I don't even worry about
+whether the figure typically counts as a philosopher. Some selections
+caught my attention because I find them entertaining, like the ones
+from Gellius and Twain. Others represent a genre of sorts or have been
+useful for stimulating discussion in class. Still others merely
+demonstrate what sort of material is available in the public domain,
+even if I'd always assign contemporary editions of those texts. And
+finally, I've added some texts because they might serve, or have
+served, as primary or supplemental readings for my courses.
 
 1. Thucydides – Pericles' Funeral Oration
 1. Plato – Euthyphro
@@ -102,7 +101,7 @@ aren't included in the official binaries.
 1. Emma Goldman – The Tragedy of Woman's Emancipation
 1. Miguel de Unamuno – My Religion
 
-## REQUIREMENTS
+## Requirements
 
 The main requirement is [TeX Live](http://www.tug.org/texlive "TeX
 Live"). I compile the anthology with whatever
@@ -122,7 +121,7 @@ system, but it's possible. In short, the requirements are:
 * [TeX Live](http://www.tug.org/texlive "TeX Live") with [XeTeX](http://en.wikipedia.org/wiki/XeTeX "XeTeX")
 * [Windy City](http://github.com/brianchase/windycity "Windy City") with [biblatex](http://www.ctan.org/pkg/biblatex "biblatex")
 
-## LICENSE
+## License
 
 All original content in this project is in the public domain. All
 works republished in this project are believed to be in the public
