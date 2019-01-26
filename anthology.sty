@@ -1,4 +1,4 @@
-% Last modified: Sat 26 Jan 2019 10:32:26 AM CST
+% Last modified: Sat 26 Jan 2019 04:45:46 PM CST
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -257,6 +257,23 @@
   \usepackage{marginnote}
   \renewcommand{\marginfont}{\normalfont\small}%
 \fi
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\toggletrue{cbx@first}%
+   \usebibmacro{cite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+\DeclareCiteCommand*{\fullcite}
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\toggletrue{cbx@first}%
+   \toggletrue{noauth}%
+   \usebibmacro{cite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Original Source Page Breaks  %%
