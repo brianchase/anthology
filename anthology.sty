@@ -1,4 +1,4 @@
-% Last modified: Sat 26 Jan 2019 04:45:46 PM CST
+% Last modified: Sun 17 Feb 2019 12:18:23 PM CST
 
 % This software is provided 'as is', without warranty of any kind,
 % either expressed or implied, including, but not limited to, the
@@ -241,9 +241,9 @@
     {\@ifnextchar[{\@xfootnote}{\@xfootnote[]}}%
     {\@ifnextchar[{\@yfootnote}{\@yfootnote[]}}}
 \def\@xfootnote[#1]#2{%
-  \@zfootnote{Republished~from~\fullcite*[#1]{#2}}}
+  \@zfootnote{\fullcite*[Reprinted~from][#1]{#2}}}
 \def\@yfootnote[#1]#2{%
-  \@zfootnote{Republished~from~\fullcite[#1]{#2}}}
+  \@zfootnote{\fullcite[Reprinted~from][#1]{#2}}}
 \newcommand{\@zfootnote}[1]{%
   \insert\footins{\normalfont\footnotesize
   \interlinepenalty\interfootnotelinepenalty
