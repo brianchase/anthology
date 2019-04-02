@@ -103,23 +103,7 @@ aren't included in the official binaries.
 
 ## Requirements
 
-The main requirement is [TeX Live](http://www.tug.org/texlive "TeX
-Live"). I compile the anthology with whatever
-[version](https://www.archlinux.org/packages/?q=texlive) is in the
-official repositories at [Arch Linux](https://www.archlinux.org/ "Arch
-Linux"), since that's my distribution of choice. In addition, the
-style compiles with [XeTeX](http://en.wikipedia.org/wiki/XeTeX
-"XeTeX"), which is available with TeX Live, and [Windy
-City](http://github.com/brianchase/windycity "Windy City"), which
-isn't. The latter is my own style for
-[biblatex](http://www.ctan.org/pkg/biblatex "biblatex") and formats
-citations in the text. Although biblatex comes with TeX Live, I often,
-but not always, use a more recent version of it. This isn't likely to
-cause problems if you try to compile the anthology on your own
-system, but it's possible. In short, the requirements are:
-
-* [TeX Live](http://www.tug.org/texlive "TeX Live") with [XeTeX](http://en.wikipedia.org/wiki/XeTeX "XeTeX")
-* [Windy City](http://github.com/brianchase/windycity "Windy City") with [biblatex](http://www.ctan.org/pkg/biblatex "biblatex")
+* [Windy City](http://github.com/brianchase/windycity "Windy City") for [biblatex](http://www.ctan.org/pkg/biblatex "biblatex")
 
 ## License
 
